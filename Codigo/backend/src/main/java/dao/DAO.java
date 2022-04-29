@@ -1,18 +1,18 @@
-package utils;
+package dao;
 
 import java.sql.*;
 
-public class Conexao {
+public class DAO {
 
 	private static Connection conexao;
 	private static String driverName = "org.postgresql.Driver";
 	private static String serverName = "localhost";
-	private static String mydatabase = "StorageSolutions";
+	private static String mydatabase = "Aplicacao";
 	private static int porta = 5432;
 	private static String username = "ti2cc";
 	private static String password = "ti@cc";
 
-	public Conexao() {
+	public DAO() {
 		conexao = null;
 	}
 

@@ -1,8 +1,8 @@
 package app;
 
-public class StorageSolutions {
+public class Aplicacao {
 
-	public StorageSolutions() {
+	public Aplicacao() {
 		// TODO Auto-generated constructor stub
 	}
 
