@@ -4,40 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Storage Solutions</title>
 
     <!-- CSS -->
+    <link rel="stylesheet" href="./styles/index.css">
 
     <!-- bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="container py-4">
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent pb-3  border-bottom">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Storage Solutions</a>
+    <!-- header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="./index.html">
+                    <img src="./img/logo-nav.png" alt="logo do site: (caixa aberta com uma lâmpada dentro)">
+                </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarText">
+      
+                <div class="collapse navbar-collapse" id="navbarsExample07">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" href="#home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contato</a>
+                            <a class="nav-link" href="#funcionalidade">Funcionalidade</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#sobre">Sobre nós</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contato">Contato</a>
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+                    <ul class="navbar-nav list-inline align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Login</a>
+                            <a class="nav-link" href="./login.html">Entrar</a>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-primary me-2" type="button">Cadastro</button>
+                            <a class="nav-link" href="./cadastro.html">
+                                <button class="btn btn-outline-light">Registrar-se</button>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -45,70 +57,136 @@
         </nav>
     </header>
 
-    <!-- MAIN -->
+    <!-- main -->
     <main>
-        <section class="home container py-4">
-            <div class="p-5 mb-4 bg-light rounded-3">
-                <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">Custom jumbotron</h1>
-                    <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-                    <button class="btn btn-primary btn-lg" type="button">Example button</button>
-                </div>
-            </div>
-        
-            <div class="row align-items-md-stretch">
-                <div class="col-md-6">
-                    <div class="h-100 p-5 text-white bg-dark rounded-3">
-                        <h2>Change the background</h2>
-                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-                        <button class="btn btn-outline-light" type="button">Example button</button>
+        <section id="home" class="home bg-dark py-5 mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-8 home-content">
+                        <h1 class="mb-5 text-light">Organize seu estoque</h1>
+                        <h3 class="mb-5" style="color: #FFFFFF8C; font-size: larger;">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro reiciendis minus corrupti molestiae consequatur ratione veniam maiores possimus unde quasi?
+                        </h3>
+                        <a href="./login.html">
+                            <button class="btn px-5 py-3 btn-outline-light">Entrar</button>
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="h-100 p-5 bg-light border rounded-3">
-                        <h2>Add borders</h2>
-                        <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-                        <button class="btn btn-outline-secondary" type="button">Example button</button>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <img class="img-fluid w-100" src="./img/organizacao.svg" alt="home">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="contact bg-light mt-4 py-4">
-            <div class="container py-4">
-                <h2 class="text-center">Contato</h2>
+        <section id="funcionalidades" class="funcionalidades py-5 mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 content-pesquisa">
+                        <div class="line mb-3"></div>
+                        <h2 class="text-dark text-center mb-4 text-pesquisa"><span class="quotes">"</span>Pesquisa do Sebrae identificou que 43% das empresas fazem a gestão de seu negócio em um caderno ou folha de papel<span class="quotes">"</span></h2>
+                        <p class="text-dark text-end">Valor Econômico, 2020</p>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <form class="mt-4" id="contactForm">
-                    <div class="mb-3">
-                        <label class="form-label" for="name">Name</label>
-                        <input class="form-control" id="name" type="text" placeholder="Name" />
+        <section id="sobre" class="sobre bg-light pt-5">
+            <div class="container pb-5 border-bottom">
+                <div class="row">
+                    <div class="col-12 col-md-6 sobre-content">
+                        <img style="width: 100%;" src="./img/funcionalidades-1.svg" alt="sobre nós">
                     </div>
-                
-                    <div class="mb-3">
-                        <label class="form-label" for="emailAddress">Email Address</label>
-                        <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" />
+
+                    <div class="col-12 col-md-6 ps-5">
+                        <h2>Storage Solutions, sua solução.</h2>
+                        <div class="line mb-5"></div>
+                        <p class="text-dark">Controle de estoque para empresas que não utilizam bancos de dados relacionais para a gestão dos produtos no inventário</p>
                     </div>
-                
-                    <div class="mb-3">
-                        <label class="form-label" for="message">Message</label>
-                        <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="sobre bg-light py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 d-flex justify-content-center">
+                        <div class="card py-5" style="width: 20rem;">
+                            <img src="./img/365cons-157.svg" class="card-img-func mb-4" alt="imgem de card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Praticidade</h5>
+                                <p class="card-text text-center">Armazenar os dados dos produtos em um BD, sem ser necessário ter conhecimento de SQL para realizar consultas.</p>
+                            </div>
+                        </div>
                     </div>
-                
-                    <div class="d-grid">
-                        <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                    <div class="col-12 col-md-4 d-flex justify-content-center">
+                        <div class="card py-5" style="width: 20rem;">
+                            <img src="./img/365cons-124.svg" class="card-img-func mb-4" alt="imgem de card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Modernização</h5>
+                                <p class="card-text text-center">Auxiliar estabelecimentos na adoção de práticas mais eficientes para a sua gestão, abandonando métodos como o uso de planilhas.</p>
+                            </div>
+                        </div>
                     </div>
-                </form>
-              </div>
+                    <div class="col-12 col-md-4 d-flex justify-content-center">
+                        <div class="card py-5" style="width: 20rem;">
+                            <img src="./img/365cons-217.svg" class="card-img-func mb-4" alt="imgem de card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Impacto</h5>
+                                <p class="card-text text-center">Tornar as empresas dos nossos clientes mais rentáveis com o planejamento de compra de acordo com a disponibilidade e a demanda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="contato bg-secondary py-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                        <h2 class="text-center text-white">Contato</h2>
+                        <div class="line mb-5" style="background-color: #fff;"></div>
+
+                        <h5 class="text-center text-white-50">Quer falar com a gente? Mande uma mensagem!</h2>
+                    </div>
+                </div>
+
+                <form action="#" class="row form-contact">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mb-4">
+                            <input type="text" name="txtName" class="form-control" placeholder="Seu nome" value="" />
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="text" name="txtEmail" class="form-control" placeholder="Seu e-mail" value="" />
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="text" name="txtPhone" class="form-control" placeholder="eu número de telefone" value="" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="btnSubmit" class="btn btn-outline-light">Enviar</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <textarea name="txtMsg" class="form-control" placeholder="Sua Mensagem" style="width: 100%; height: 224px; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="py-2 text-muted bg-dark text-center">
-        &copy; Todos os direitos reservados 2022
+    <!-- footer -->
+    <footer class="bg-dark py-3">
+        <ul class="nav justify-content-center pb-3 mb-3" style="border-bottom: 1px solid #333940!important;">
+            <li class="nav-item"><a href="#home" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#funcionalidade" class="nav-link px-2 text-muted">Funcionalidade</a></li>
+            <li class="nav-item"><a href="#sobre" class="nav-link px-2 text-muted">Sobre nós</a></li>
+            <li class="nav-item"><a href="#contato" class="nav-link px-2 text-muted">Contato</a></li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2022 Storage Solutions. Todos os direitos reservados.</p>
     </footer>
-    
-    <!-- JS -->
-
     <!-- bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
