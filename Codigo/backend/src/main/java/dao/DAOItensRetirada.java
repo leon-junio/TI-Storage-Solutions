@@ -40,7 +40,7 @@ public class DAOItensRetirada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM itensRetirada WHERE id=" + id;
+			String sql = "SELECT * FROM Itens_Retirada WHERE id=" + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				itensRetirada = new ItemRetirada(rs.getInt("produto"), rs.getInt("retirada"), rs.getInt("quantidade"));
@@ -62,7 +62,7 @@ public class DAOItensRetirada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM itensRetirada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM Itens_Retirada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				ItemRetirada p = new ItemRetirada(rs.getInt("produto"), rs.getInt("retirada"), rs.getInt("quantidade"));
@@ -79,7 +79,7 @@ public class DAOItensRetirada extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM itensRetirada WHERE id = " + id);
+			st.executeUpdate("DELETE FROM Itens_Retirada WHERE id = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {
