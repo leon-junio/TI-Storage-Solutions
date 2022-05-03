@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Storage Solutions</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- HEADER -->
+        <header class="container py-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent pb-3  border-bottom">
+                
+                <div class="container-fluid">
+                    <a href="/home.html"><img id="logo" src="img.png"></a>
+                    <!-- <a class="navbar-brand" href="#">Storage Solutions</a> -->
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"></a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-secondary" type="button">Logout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- MAIN -->
+        <main>
+            <section class="contact mt-4 py-4">
+                <div class="container py-4">
+                  <h1>Menu de Opções</h1>
+                  <br>
+                  <br>
+                <!-- <div class="p-5 mb-4 bg-light rounded-3">
+                    <div class="container-fluid py-5"> -->
+                    <div class="row">
+                        <div>
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-sm-12 col-md-5 col-lg-3"><a class="options" data-toggle="modal" data-target="#estoqueModal">
+                                <div class="card-counter btn-primary">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <i class="fa fa-database"></i>
+                                    </div>
+                                    <div class="col-9">
+                                      <span class="count-numbers">Criar</span>
+                                      <span class="count-name">Estoque</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+                              
+                              <div class="col-sm-12 col-md-2 col-lg-1"></div>
+                              
+                              <div class="col-sm-12 col-md-5 col-lg-3"><a href="./list.html" class="options">
+                                <div class="card-counter btn-danger">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <i class="fa fa-table"></i>
+                                    </div>
+                                    <div class="col-9">
+                                      <span class="count-numbers">Listar</span>
+                                      <span class="count-name">Produtos</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a></div>
+
+                              <div class="col-sm-12 col-md-0 col-lg-1"></div>
+                              
+                              <div class="col-sm-12 col-md-5 col-lg-3">
+                                <div class="card-counter btn-success">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="col-9">
+                                      <span class="count-numbers">Perfil</span>
+                                      <span class="count-name">do Usuário</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-12 col-md-2 col-lg-1"></div>
+
+                              <div class="col-sm-12 col-md-5 col-lg-3">
+                                <div class="card-counter btn-warning">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <i class="fa fa-cart-plus"></i>
+                                    </div>
+                                    <div class="col-9">
+                                      <span class="count-numbers">Nova</span>
+                                      <span class="count-name">Remessa</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="col-sm-12 col-md-0 col-lg-1"></div>
+                          
+                              <div class="col-sm-12 col-md-5 col-lg-3">
+                                <div class="card-counter btn-secondary">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <i class="fa fa-cart-arrow-down"></i>
+                                    </div>
+                                    <div class="col-9">
+                                      <span class="count-numbers">Nova</span>
+                                      <span class="count-name">Retirada</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="col-sm-12 col-md-2 col-lg-1"></div>
+                              
+                              <div class="col-sm-12 col-md-5 col-lg-3">
+                                <div class="card-counter btn-info">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <i class="fa fa-search"></i>
+                                    </div>
+                                    <div class="col-9">
+                                      <span class="count-numbers">Pesquisar</span>
+                                      <span class="count-name">Produtos</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>           
+                        </div>
+                    </div>    
+                </div>
+                <br>
+                <div class="container py-4">
+                </div>
+                <div class="container py-4">
+                </div>
+                <div class="container py-4">
+                </div>
+                <div class="container py-4">
+                </div>
+              <!-- Modal -->
+                <div class="modal fade" id="estoqueModal" tabindex="-1" role="dialog" aria-labelledby="estoqueModalLabel" aria-hidden="true">
+                  <form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Novo Estoque</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      
+                      <div class="modal-body">
+                          <div class="col-sm-12">
+                                  <div id="formCadastro">
+                                    <input type="text" id="nome" class="fadeIn second" name="nome" placeholder="Nome">
+                                    <input type="text" id="capacidade" class="fadeIn second" name="email" placeholder="Capacidade">  
+                                    <input type="text" id="CEP" class="fadeIn third" name="CEP" placeholder="CEP">
+                                    <input type="text" id="estado" class="fadeIn third" name="estado" placeholder="Estado">
+                                  </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Adicionar</button>
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="py-2 text-muted bg-dark text-center">
+            &copy; Todos os direitos reservados 2022
+        </footer>
+        
+        <!-- JS -->
+
+        <!-- bootstrap 5 -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
