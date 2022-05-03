@@ -44,47 +44,66 @@
     </navbar>
 
     <main class="main container pt-5">
-        <h4 class="text-center mb-5">Minhas Informações</h4>
+        <div class="row">
+            <div class="col-12">
+                <a href="./home-produtos.html">
+                    <button class="mb-4 px-4 py-2 btn btn-dark off">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center mb-5">Produto: <strong>Nome Produto</strong></h4>
+            </div>
+        </div>
 
         <form action="#" class="form">
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="tipo" class="form-label">Tipo</label>
-                    <input type="text" name="tipo" id="tipo" class="form-control" required>
-                </div>
-            </div>
-           
+            <input type="hidden" name="id" id="id" class="form-control">
+
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="nome" class="form-label">Nome</label>
                     <input type="text" name="nome" id="nome" class="form-control">
                 </div>
                 <div class="col-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-control">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <input type="text" name="descricao" id="descricao" class="form-control">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-6">
-                    <label for="telefone" class="form-label">Telefone</label>
-                    <input type="text" name="telefone" id="telefone" class="form-control">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" name="marca" id="marca" class="form-control">
                 </div>
                 <div class="col-6">
-                    <label for="cpf" class="form-label">CPF</label>
-                    <input type="email" name="cpf" id="cpf" class="form-control">
+                    <label for="qtd" class="form-label">Quantidade</label>
+                    <input type="number" name="qtd" id="qtd" class="form-control">
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col-6">
-                    <label for="telefone" class="form-label">Endereço</label>
-                    <input type="text" name="endereco" id="endereco" class="form-control">
+                    <label for="val" class="form-label">Validade</label>
+                    <input type="text" name="val" id="val" class="form-control">
                 </div>
-                <div class="col-6 d-flex justify-content-start align-items-end">
-                    <a href="./home-trocar-senha.html">
-                        <button type="button" class="btn btn-outline-primary p-3">Trocar Senha</button>
-                    </a>
+                <div class="col-6">
+                    <label for="fabricacao" class="form-label">Ano Fabricação</label>
+                    <input type="text" name="fabricacao" id="fabricacao" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-6">
+                    <label for="codBarras" class="form-label">Código de Barras</label>
+                    <input type="text" name="codBarras" id="codBarras" class="form-control">
+                </div>
+                <div class="col-6">
+                    <label for="codMedidas" class="form-label">Código de Medidas</label>
+                    <input type="text" name="codMedidas" id="codMedidas" class="form-control">
                 </div>
             </div>
             
