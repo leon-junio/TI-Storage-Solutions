@@ -9,6 +9,7 @@ import service.*;
 public class Aplicacao {
 	
 	private static ProdutoService produtoService = new ProdutoService();
+	private static HomeService homeService = new HomeService();
 	private static ClienteService clienteService = new ClienteService();
 	private static FornecedorService fornecedorService = new FornecedorService();
 	private static EstoqueService estoqueService = new EstoqueService();

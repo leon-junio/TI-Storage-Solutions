@@ -44,5 +44,17 @@ protected Connection conexao;
 		}
 		return status;
 	}
+	
+	/**
+	 * Metódo de acesso ao sistema e funcionalidade de login
+	 * @param usuario - Usuário para localizar na base de dados
+	 * @param senha - Senha do usuário para procurar no Base de dados e validar a conexão
+	 * @return boolean verdadeiro caso encontre o usuário e falso caso não encontre
+	 */
+	public boolean login(String usuario, String senha) {
+		boolean login = false;
+		
+		return login;
+	}
 
 }
