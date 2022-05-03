@@ -5,7 +5,7 @@ public class Fornecedor {
 	private int idFornecedor;
 	private String usuario, nome, senha, tipoProduto, email;
 	
-	public Fornecedor(int idFornecedor, String usuario, String nome, String senha, String tipoProduto, String email) {
+	public Fornecedor(int idFornecedor, String nome, String email, String usuario,String senha, String tipoProduto) {
 		this.idFornecedor = idFornecedor;
 		this.usuario = usuario;
 		this.nome = nome;

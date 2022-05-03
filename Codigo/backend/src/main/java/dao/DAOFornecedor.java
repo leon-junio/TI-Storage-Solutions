@@ -1,10 +1,6 @@
 package dao;
 
-public class DAOFornecedor {
-
-package dao;
-
-import model.Cliente;
+import model.Fornecedor;
 import utils.HashUtils;
 
 import java.sql.PreparedStatement;
@@ -14,26 +10,26 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOCliente extends DAO {
-	public DAOCliente() {
-			super();
-			conectar();
-		}
+public class DAOFornecedor extends DAO {
+	public DAOFornecedor() {
+		super();
+		conectar();
+	}
 
 	public void finalize() {
 		close();
 	}
 
-	public boolean insert(Cliente cliente) {
+	public boolean insert(Fornecedor fornecedor) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO cliente (nome,email,usuario,senha) "
-					+ "VALUES (?,?,?,?);";
+			String sql = "INSERT INTO fornecedor (nome,email,usuario,senha,tipoProduto) " + "VALUES (?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
-			st.setString(1, cliente.getNome());
-			st.setString(2, cliente.getEmail());
-			st.setString(3, cliente.getUsuario());
-			st.setString(4, HashUtils.getHashMd5(cliente.getSenha()));
+			st.setString(1, fornecedor.getNome());
+			st.setString(2, fornecedor.getEmail());
+			st.setString(3, fornecedor.getUsuario());
+			st.setString(4, HashUtils.getHashMd5(fornecedor.getSenha()));
+			st.setString(5, fornecedor.getTipoProduto());
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -43,69 +39,70 @@ public class DAOCliente extends DAO {
 		return status;
 	}
 
-	public Cliente get(int id) {
-		Cliente cliente = null;
+	public Fornecedor get(int id) {
+		Fornecedor fornecedor = null;
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente WHERE id=" + id;
+			String sql = "SELECT * FROM fornecedor WHERE id=" + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
-				cliente = new Cliente(rs.getInt("idCliente"),rs.getString("nome"), rs.getString("email"), rs.getString("usuario"),
-						rs.getString("senha"));
+				fornecedor = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
+						rs.getString("usuario"), rs.getString("senha"),rs.getString("tipoProduto"));
 			}
 			st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return cliente;
+		return fornecedor;
 	}
 
-	public List<Cliente> get() {
+	public List<Fornecedor> get() {
 		return get("");
 	}
 
-	public List<Cliente> getOrderByID() {
+	public List<Fornecedor> getOrderByID() {
 		return get("id");
 	}
 
-	public List<Cliente> getOrderByDescricao() {
+	public List<Fornecedor> getOrderByDescricao() {
 		return get("descricao");
 	}
 
-	public List<Cliente> getOrderByPreco() {
+	public List<Fornecedor> getOrderByPreco() {
 		return get("preco");
 	}
 
-	private List<Cliente> get(String orderBy) {
-		List<Cliente> clientes = new ArrayList<Cliente>();
+	private List<Fornecedor> get(String orderBy) {
+		List<Fornecedor> fornecedors = new ArrayList<Fornecedor>();
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM fornecedor" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
-				Cliente p = new Cliente(rs.getInt("idCliente"),rs.getString("nome"), rs.getString("email"), rs.getString("usuario"),
-						rs.getString("senha"));
-				clientes.add(p);
+				Fornecedor p = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
+						rs.getString("usuario"), rs.getString("senha"),rs.getString("tipoProduto"));
+				fornecedors.add(p);
 			}
 			st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return clientes;
+		return fornecedors;
 	}
 
-	public boolean update(Cliente cliente) {
+	public boolean update(Fornecedor fornecedor) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE cliente SET nome=?,email=?,usuario=?,senha=? WHERE idCliente = ?;";
+			String sql = "UPDATE fornecedor SET nome=?,email=?,usuario=?,senha=? WHERE idFornecedor = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
-			st.setString(1, cliente.getNome());
-			st.setString(2, cliente.getEmail());
-			st.setString(3, cliente.getUsuario());
-			st.setString(4, HashUtils.getHashMd5(cliente.getSenha()));
-			st.setInt(5,cliente.getIdCliente());
+			st.setString(1, fornecedor.getNome());
+			st.setString(2, fornecedor.getEmail());
+			st.setString(3, fornecedor.getUsuario());
+			st.setString(4, HashUtils.getHashMd5(fornecedor.getSenha()));
+			st.setString(5, fornecedor.getTipoProduto());
+			st.setInt(6, fornecedor.getIdFornecedor());
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -119,7 +116,7 @@ public class DAOCliente extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM cliente WHERE id = " + id);
+			st.executeUpdate("DELETE FROM fornecedor WHERE id = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {
@@ -127,6 +124,4 @@ public class DAOCliente extends DAO {
 		}
 		return status;
 	}
-}
-
 }
