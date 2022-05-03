@@ -41,7 +41,7 @@ public class DAOEstoque extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM estoque WHERE id=" + id;
+			String sql = "SELECT * FROM estoque WHERE idEstoque = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				estoque = new Estoque(rs.getInt("idEstoque"), rs.getInt("capacidade"), rs.getInt("cliente"),
@@ -59,7 +59,7 @@ public class DAOEstoque extends DAO {
 	}
 
 	public List<Estoque> getOrderByID() {
-		return get("id");
+		return get("idEstoque");
 	}
 
 	public List<Estoque> getOrderByCliente() {
@@ -112,7 +112,7 @@ public class DAOEstoque extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM estoque WHERE id = " + id);
+			st.executeUpdate("DELETE FROM estoque WHERE idEstoque = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

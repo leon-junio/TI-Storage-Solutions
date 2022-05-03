@@ -41,7 +41,7 @@ public class DAOEntrada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM entrada WHERE id=" + id;
+			String sql = "SELECT * FROM entrada WHERE idEntrada = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				entrada = new Entrada(rs.getInt("idEntrada"), rs.getInt("quantidade"), rs.getInt("estoque"),
@@ -59,7 +59,7 @@ public class DAOEntrada extends DAO {
 	}
 
 	public List<Entrada> getOrderByID() {
-		return get("id");
+		return get("idEntrada");
 	}
 
 
@@ -105,7 +105,7 @@ public class DAOEntrada extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM entrada WHERE id = " + id);
+			st.executeUpdate("DELETE FROM entrada WHERE idEntrada = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

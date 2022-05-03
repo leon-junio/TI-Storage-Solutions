@@ -1,9 +1,8 @@
 package dao;
 
-import model.Cliente;
+
 import model.Fornecedor;
 import utils.HashUtils;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,7 +44,7 @@ public class DAOFornecedor extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM fornecedor WHERE id=" + id;
+			String sql = "SELECT * FROM fornecedor WHERE idFornecedor = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				fornecedor = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
@@ -63,7 +62,7 @@ public class DAOFornecedor extends DAO {
 	}
 
 	public List<Fornecedor> getOrderByID() {
-		return get("id");
+		return get("idFornecedor");
 	}
 
 	public List<Fornecedor> getOrderByUsuario() {
@@ -113,7 +112,7 @@ public class DAOFornecedor extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM fornecedor WHERE id = " + id);
+			st.executeUpdate("DELETE FROM fornecedor WHERE idFornecedor = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

@@ -44,7 +44,7 @@ public class DAOEndereco extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM endereco WHERE id=" + id;
+			String sql = "SELECT * FROM endereco WHERE idEndereco = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				endereco = new Endereco(rs.getInt("idEndereco"),rs.getInt("numero"), rs.getString("cep"), rs.getString("estado"),
@@ -62,7 +62,7 @@ public class DAOEndereco extends DAO {
 	}
 
 	public List<Endereco> getOrderByID() {
-		return get("id");
+		return get("idEndereco");
 	}
 
 
@@ -111,7 +111,7 @@ public class DAOEndereco extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM endereco WHERE id = " + id);
+			st.executeUpdate("DELETE FROM endereco WHERE idEndereco = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

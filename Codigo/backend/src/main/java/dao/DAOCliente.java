@@ -45,7 +45,7 @@ public class DAOCliente extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente WHERE id=" + id;
+			String sql = "SELECT * FROM cliente WHERE idCliente = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				cliente = new Cliente(rs.getInt("idCliente"),rs.getString("nome"), rs.getString("email"), rs.getString("usuario"),
@@ -63,7 +63,7 @@ public class DAOCliente extends DAO {
 	}
 
 	public List<Cliente> getOrderByID() {
-		return get("id");
+		return get("idCliente");
 	}
 
 	public List<Cliente> getOrderByUsuario() {
@@ -112,7 +112,7 @@ public class DAOCliente extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM cliente WHERE id = " + id);
+			st.executeUpdate("DELETE FROM cliente WHERE idCliente = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {
