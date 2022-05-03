@@ -66,12 +66,8 @@ public class DAOCliente extends DAO {
 		return get("id");
 	}
 
-	public List<Cliente> getOrderByDescricao() {
-		return get("descricao");
-	}
-
-	public List<Cliente> getOrderByPreco() {
-		return get("preco");
+	public List<Cliente> getOrderByUsuario() {
+		return get("usuario");
 	}
 
 	private List<Cliente> get(String orderBy) {

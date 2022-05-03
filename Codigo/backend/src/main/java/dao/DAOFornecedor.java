@@ -1,5 +1,6 @@
 package dao;
 
+import model.Cliente;
 import model.Fornecedor;
 import utils.HashUtils;
 
@@ -65,12 +66,8 @@ public class DAOFornecedor extends DAO {
 		return get("id");
 	}
 
-	public List<Fornecedor> getOrderByDescricao() {
-		return get("descricao");
-	}
-
-	public List<Fornecedor> getOrderByPreco() {
-		return get("preco");
+	public List<Fornecedor> getOrderByUsuario() {
+		return get("usuario");
 	}
 
 	private List<Fornecedor> get(String orderBy) {
