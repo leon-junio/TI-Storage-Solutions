@@ -22,7 +22,7 @@
 
         function ver() {
             let dataQuery = new XMLHttpRequest();
-            dataQuery.open('GET', `http://localhost:6789/main/check/` + user.token);
+            dataQuery.open('GET', 'http://localhost:6789/main/check/' + user.token);
             dataQuery.onload = checker;
             dataQuery.send();
         }
@@ -33,9 +33,25 @@
             let data = JSON.parse(this.responseText);
             if (data.response == "false") {
                 alerta("Acesso restrito!");
-                window.location.href = "./index.html";
+                window.location.href = "../index.html";
+            }else{
+                listar();
             }
         }
+        
+        function listar(){
+        	 let dataQuery = new XMLHttpRequest();
+             dataQuery.open('GET', 'http://localhost:6789/main/listar/' + user.token);
+             dataQuery.onload = buildFront;
+             dataQuery.send();
+        }
+        
+        function buildFront(){
+        	  let data = JSON.parse(this.responseText);
+        	  let div = document.getElementById("list-estoque");
+        	  div.innerHTML = data.response;
+        }
+        
     </script>
 </head>
 
@@ -79,7 +95,7 @@
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="list-estoque">
                 <tr>
                     <td>Estoque - Alimentos</td>
                     <td>Estoque do armazém de carne....</td>

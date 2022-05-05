@@ -28,6 +28,7 @@ public class Aplicacao {
          *  REQUISIÇÕES DOS SERVIÇOS DO MAIN 
          */
         get("/main/check/:token", (request, response) -> mainService.check(request, response));
+        get("/main/listar/:token", (request, response) -> mainService.listar(request, response));
         post("/main/login", (request, response) -> mainService.login(request, response));
         post("/main/cadastro", (request, response) -> mainService.cadastro(request, response));
         

@@ -34,7 +34,7 @@ public class MainService {
 		if (resp) {
 			response.status(201);
 			return "<script src=\"" + app.Aplicacao.url + "/js/acess.js" + "\"></script>\n<script>loginSucess('" + email
-					+ "','" + senha + "','" + daotk.insert(email, senha) + "');\n" + "window.location.href = '"
+					+ "','" + HashUtils.getHashMd5(senha) + "','" + daotk.insert(email, senha) + "');\n" + "window.location.href = '"
 					+ app.Aplicacao.url + home + "';</script>";
 		} else {
 			// response.status(404);
