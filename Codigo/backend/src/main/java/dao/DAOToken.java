@@ -81,4 +81,27 @@ public class DAOToken extends DAO {
 		}
 		return status;
 	}
+	
+	public Object convertToken(String token)
+{
+Object obj = null;
+DAOCliente daoc = new DAOCliente();
+DAOFornecedor daof = new DAOFornecedor();
+try{
+String sql = "Select * from StorageSolutionsDB.tokens where token like '"+token+"'";
+Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+ResultSet rs = st.executeQuery(sql);
+if(rs.next()){
+	String email = rs.getString("email");
+	String senha = rs.getString("senha");
+	
+}
+st.close
+
+daoc
+
+}catch(Exception e){
+	e.printStackTrace();
+}
+}
 }
