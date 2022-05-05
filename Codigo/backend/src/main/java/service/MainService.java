@@ -48,6 +48,42 @@ public class MainService {
         response.status(200);
         return utils.LeonAPI.stringToJson(""+daotk.check(token));
     }
+    
+    public Object listar(Request request, Response response) {
+        String token = request.params(":token");
+        Object prop = new DAOToken().convertToken(token);
+
+        String resp = "";
+
+        List<model.Estoque> estoques = new DAOEstoque().get(prop.idcliente);
+
+        response.header("Content-Type", "Json; charset=utf-8");
+
+        if (estoques.length > 0) {
+            response.status(200); 
+
+            for (model.Estoque estoque : estoques) {
+                resp += "<tr>";
+                resp += "<td>" + estoque.nome + "</td>\n";
+                resp += "<td>" + estoque.descricao + "</td>\n";
+                resp += "<td>" + estoque.quantidade + "</td>\n";
+                resp += "<td class=\"d-flex align-items-center gap-5\">\n";
+                resp += "<a href=\"./home-estoque.html\">"; 
+                resp += "<button type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-eye\"></i></button>";
+                resp += "</a>"; 
+                resp += "<button type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button>";
+                resp += "<button type=\"button\" class=\"btn btn-outline-danger\"><i class=\"fas fa-trash\"></i></button>";
+                resp += "</td>";
+                resp = "</tr>\n"
+            }
+        } else {
+            response.status(203); 
+
+            resp += "<tr><td>Não existem estoques cadastrados</td></tr>"; 
+        }
+
+        return utils.LeonAPI.stringToJson(resp);
+    }
 
     public Object cadastro(Request request, Response response) {
         String tipoUsuario = request.queryParams("tipo");
