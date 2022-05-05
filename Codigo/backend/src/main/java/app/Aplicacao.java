@@ -10,14 +10,26 @@ public class Aplicacao {
 	
 	private static ProdutoService produtoService = new ProdutoService();
 	private static HomeService homeService = new HomeService();
+    private static MainService mainService = new MainService();
 	private static ClienteService clienteService = new ClienteService();
 	private static FornecedorService fornecedorService = new FornecedorService();
 	private static EstoqueService estoqueService = new EstoqueService();
+	public static final int porta = 6789;
+	public static final String url = "http://localhost:" + porta;
 	
     public static void main(String[] args) {
-        port(6789);
+       
+    	
+    	port(porta);
         
         staticFiles.location("/public");
+        
+        /**
+         *  REQUISIÇÕES DOS SERVIÇOS DO MAIN 
+         */
+        get("/main/check/:token", (request, response) -> mainService.check(request, response));
+        post("/main/login", (request, response) -> mainService.login(request, response));
+        post("/main/cadastro", (request, response) -> mainService.cadastro(request, response));
         
         //CRIAR O WEBSERVICE AQUI!
         
