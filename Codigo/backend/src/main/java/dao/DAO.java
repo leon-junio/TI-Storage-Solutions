@@ -25,11 +25,11 @@ protected Connection conexao;
 			Class.forName(driverName);
 			conexao = DriverManager.getConnection(url, username, password);
 			status = (conexao == null);
-			System.out.println("Conex�o efetuada com o postgres!");
+			System.out.println("Uma conexao com o postgres foi executada com sucesso!");
 		} catch (ClassNotFoundException e) { 
-			System.err.println("Conex�o N�O efetuada com o postgres -- Driver n�o encontrado -- " + e.getMessage());
+			System.err.println("Conexao nao efetuada com o postgres -- Driver nao encontrado -- " + e.getMessage());
 		} catch (SQLException e) {
-			System.err.println("Conex�o N�O efetuada com o postgres -- " + e.getMessage());
+			System.err.println("Conexao nao efetuada com o postgres -- " + e.getMessage());
 		}
 
 		return status;

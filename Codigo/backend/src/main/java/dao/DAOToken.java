@@ -56,6 +56,9 @@ public class DAOToken extends DAO {
 	public boolean check(String token) {
 		boolean resp = false;
 		try {
+			if(token == null) {
+				throw new Exception("Token nulo enviado!");
+			}
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			String sql = "SELECT * FROM StorageSolutionsDB.tokens WHERE token like '" + token + "'";
 			ResultSet rs = st.executeQuery(sql);
@@ -74,6 +77,20 @@ public class DAOToken extends DAO {
 		try {
 			Statement st = conexao.createStatement();
 			st.executeUpdate("DELETE FROM StorageSolutionsDB.tokens WHERE idToken = " + id);
+			st.close();
+			status = true;
+		} catch (SQLException u) {
+			throw new RuntimeException(u);
+		}
+		return status;
+	}
+	
+	
+	public boolean dropAll() {
+		boolean status = false;
+		try {
+			Statement st = conexao.createStatement();
+			st.executeUpdate("TRUNCATE TABLE StorageSolutionsDB.tokens;");
 			st.close();
 			status = true;
 		} catch (SQLException u) {
