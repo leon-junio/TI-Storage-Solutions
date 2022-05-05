@@ -1,4 +1,4 @@
-let usuario = {user:"",pass:"",token:""}
+let usuario = {user:" ",pass:" ",token:" "}
 
 function writeInStorage(obj){
 	localStorage.setItem('usuario', JSON.stringify(obj));
