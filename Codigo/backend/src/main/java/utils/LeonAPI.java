@@ -2,8 +2,8 @@
  @author Leon Junio Martins Ferreira
  @version 1.8.1 build 3
  @date 03/05/2022
- Essa é uma classe de funções importantes para ferramentas de uso em sistemas backend Java
- Uso pessoal e garantido por licença de uso pessoal para sistemas autorais
+ Essa ï¿½ uma classe de funï¿½ï¿½es importantes para ferramentas de uso em sistemas backend Java
+ Uso pessoal e garantido por licenï¿½a de uso pessoal para sistemas autorais
  ler license.txt
  */
 package utils;
@@ -22,10 +22,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import javax.json.Json;
+import javax.json.JsonObject;
 
 /**
  *
@@ -33,9 +36,9 @@ import javax.swing.text.MaskFormatter;
  */
 public class LeonAPI {
 
-    public static void escrever(String text,String file) throws IOException {
-        new File("dir/bin/"+file).delete();
-        File f = new File("dir/bin/"+file);
+    public static void escrever(String text, String file) throws IOException {
+        new File("dir/bin/" + file).delete();
+        File f = new File("dir/bin/" + file);
         BufferedWriter out;
         out = new BufferedWriter(new FileWriter(f));
         out.write(text);
@@ -44,7 +47,14 @@ public class LeonAPI {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    //METODOS PARA CONVERTER HORAS E DATAS
+    public static JsonObject stringToJson(String txt) {
+        JsonObject model = Json.createObjectBuilder()
+                .add("response", txt)
+                .build();
+        return model;
+    }
+
+    // METODOS PARA CONVERTER HORAS E DATAS
     public static String dinheiroConverter(float num) {
         try {
             df.setRoundingMode(RoundingMode.HALF_UP);
@@ -52,7 +62,7 @@ public class LeonAPI {
             text += df.format(num);
             return text;
         } catch (Exception e) {
-            System.out.println("Erro na conversão de preço");
+            System.out.println("Erro na conversï¿½o de preï¿½o");
             return null;
         }
     }
@@ -108,7 +118,7 @@ public class LeonAPI {
 
     public static boolean info(Component c, String msg) {
         try {
-            JOptionPane.showMessageDialog(c, msg, "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(c, msg, "Informaï¿½ï¿½o", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (Exception e) {
             System.out.println("Erro na msg de info");
@@ -119,18 +129,22 @@ public class LeonAPI {
     public static int pergunta(Component cp, String msg, int op) {
         switch (op) {
             case 1:
-                return JOptionPane.showConfirmDialog(cp, msg, "Decisão:", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                return JOptionPane.showConfirmDialog(cp, msg, "Decisï¿½o:", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
             case 2:
-                return JOptionPane.showConfirmDialog(cp, msg, "Sair:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                return JOptionPane.showConfirmDialog(cp, msg, "Sair:", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
             case 3:
-                return JOptionPane.showConfirmDialog(cp, msg, "Escolha:", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                return JOptionPane.showConfirmDialog(cp, msg, "Escolha:", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
             default:
                 return -1;
         }
     }
 
-    public static  int exclusao(Component cp, String msg) {
-        return JOptionPane.showConfirmDialog(cp, msg, "Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+    public static int exclusao(Component cp, String msg) {
+        return JOptionPane.showConfirmDialog(cp, msg, "Exclusï¿½o", JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
     }
 
     private MaskFormatter mask;
@@ -161,9 +175,10 @@ public class LeonAPI {
             return null;
         }
     }
+
     private static String cpx = "";
 
-    public static  String gerarCpf(String cpf) {
+    public static String gerarCpf(String cpf) {
         cpx = "";
         cpf = cpf.replace(".", "");
         cpf = cpf.replace("-", "");
@@ -221,13 +236,13 @@ public class LeonAPI {
     }
 
     /**
-     * Função que retorna valor em String de uma sequência de caracteres usados
+     * Funï¿½ï¿½o que retorna valor em String de uma sequï¿½ncia de caracteres usados
      * para filtros de type no teclado
      *
      * @return uma lista de caracteres de A ate Z e 1 a 9
      */
-    public static  String chartb() {
-        return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321áÁãÃâÂàÀéÉêÊíÍóÓõÕôÔúÚçÇ";
+    public static String chartb() {
+        return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
     }
 
     public static String geradorTab(int som) {
@@ -237,17 +252,17 @@ public class LeonAPI {
         }
         return tab;
     }
-    
+
     private static char dig10, dig11;
     private static int sm, i, r, num, peso;
     private static Calendar cal, td;
 
     /**
-     * Função que retorna a diferença se uma data é antes ou depois do dia atual
+     * Funï¿½ï¿½o que retorna a diferenï¿½a se uma data ï¿½ antes ou depois do dia atual
      *
      * @param d data selecionada
      * @return verdade se for antes do dia de hoje, false se for depois do dia
-     * de hoje
+     *         de hoje
      */
     public static boolean compareDate(java.util.Date d) {
         cal = Calendar.getInstance();
@@ -258,10 +273,10 @@ public class LeonAPI {
     }
 
     /**
-     * Metódo para avaliar se um CPF é válido
+     * Metï¿½do para avaliar se um CPF ï¿½ vï¿½lido
      *
      * @param cpf String contendo o CPF
-     * @return Verdadeiro ou falso de acordo com a verificação
+     * @return Verdadeiro ou falso de acordo com a verificaï¿½ï¿½o
      * @throws Exception Caso ocorra algum erro
      */
     public static boolean verificarCpf(String cpf) throws Exception {
@@ -328,7 +343,7 @@ public class LeonAPI {
         }
     }
 
-    public static  boolean validaCNH(String cnh) {
+    public static boolean validaCNH(String cnh) {
         char char1 = cnh.charAt(0);
         if (cnh.replaceAll("\\D+", "").length() != 11
                 || String.format("%0" + 11 + "d", 0).replace('0', char1).equals(cnh)) {
@@ -361,7 +376,7 @@ public class LeonAPI {
     private static int ano = 0, mes = 0, dia = 0, idade = 0;
 
     /**
-     * Função responsável por gerar uma idade baseado em uma data
+     * Funï¿½ï¿½o responsï¿½vel por gerar uma idade baseado em uma data
      *
      * @param data data para retornar idade
      * @return idade em inteiro
@@ -391,19 +406,19 @@ public class LeonAPI {
         return idade;
     }
 
-    //conversor de timesstamp para locadate
+    // conversor de timesstamp para locadate
     public static LocalDateTime converTimestamp(java.sql.Timestamp tms) throws Exception {
         return tms.toLocalDateTime();
     }
 
     private static DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    //Formatador de dttimer para horario local
+    // Formatador de dttimer para horario local
     public static String formatDtTimer(LocalDateTime lcd) throws Exception {
         return lcd.format(dtFormatter);
     }
 
-    // Formatador de cartão SUS
+    // Formatador de cartï¿½o SUS
     public static String formatSus(String card) {
         String resp = "";
         for (int j = 1; j <= card.length(); j++) {
@@ -418,8 +433,8 @@ public class LeonAPI {
         }
         return resp;
     }
-    
-    //verificar se uma string é inteiramente numeros
+
+    // verificar se uma string ï¿½ inteiramente numeros
     public static boolean isNumber(String str) {
         boolean resp = true;
         for (int i = 0; i < str.length(); i++) {
@@ -429,5 +444,19 @@ public class LeonAPI {
             }
         }
         return resp;
+    }
+
+    public static String generateToken(int n) {
+        int lowerLimit = 97;
+        int upperLimit = 122;
+        Random random = new Random();
+        StringBuffer r = new StringBuffer(n);
+        for (int i = 0; i < n; i++) {
+            int nextRandomChar = lowerLimit
+                    + (int) (random.nextFloat()
+                            * (upperLimit - lowerLimit + 1));
+            r.append((char) nextRandomChar);
+        }
+        return r.toString();
     }
 }
