@@ -9,7 +9,3 @@ function getData() {
 function confirme(txt) {
     return confirm(txt);
 }
-
-const axiosReq = axios.create({
-    baseURL: 'https://localhost:6789'
-});
