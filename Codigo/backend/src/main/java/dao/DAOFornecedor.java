@@ -23,7 +23,7 @@ public class DAOFornecedor extends DAO {
 	public boolean insert(Fornecedor fornecedor) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO fornecedor (nome,email,usuario,senha,tipoProduto) " + "VALUES (?,?,?,?);";
+			String sql = "INSERT INTO StorageSolutionsDB.fornecedor (nome,email,usuario,senha,tipoProduto) " + "VALUES (?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, fornecedor.getNome());
 			st.setString(2, fornecedor.getEmail());
@@ -44,7 +44,7 @@ public class DAOFornecedor extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM fornecedor WHERE idFornecedor = " + id;
+			String sql = "SELECT * FROM StorageSolutionsDB.fornecedor WHERE idFornecedor = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				fornecedor = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
@@ -56,6 +56,22 @@ public class DAOFornecedor extends DAO {
 		}
 		return fornecedor;
 	}
+
+	public boolean login(String email, String pass) {
+		boolean resp = false;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM StorageSolutionsDB.fornecedor WHERE email like '" + email + "' and senha like '" + pass+"'";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				resp = true;
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return resp;
+	} 
 
 	public List<Fornecedor> get() {
 		return get("");
@@ -74,7 +90,7 @@ public class DAOFornecedor extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM fornecedor" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.fornecedor" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Fornecedor p = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
@@ -91,7 +107,7 @@ public class DAOFornecedor extends DAO {
 	public boolean update(Fornecedor fornecedor) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE fornecedor SET nome=?,email=?,usuario=?,senha=? WHERE idFornecedor = ?;";
+			String sql = "UPDATE StorageSolutionsDB.fornecedor SET nome=?,email=?,usuario=?,senha=? WHERE idFornecedor = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, fornecedor.getNome());
 			st.setString(2, fornecedor.getEmail());
@@ -112,7 +128,7 @@ public class DAOFornecedor extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM fornecedor WHERE idFornecedor = " + id);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.fornecedor WHERE idFornecedor = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

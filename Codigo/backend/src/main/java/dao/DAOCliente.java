@@ -1,9 +1,7 @@
-
 package dao;
 
 import model.Cliente;
 import utils.HashUtils;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +22,7 @@ public class DAOCliente extends DAO {
 	public boolean insert(Cliente cliente) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO cliente (nome,email,usuario,senha) "
+			String sql = "INSERT INTO StorageSolutionsDB.cliente (nome,email,usuario,senha) "
 					+ "VALUES (?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, cliente.getNome());
@@ -45,7 +43,7 @@ public class DAOCliente extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente WHERE idCliente = " + id;
+			String sql = "SELECT * FROM StorageSolutionsDB.cliente WHERE idCliente = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				cliente = new Cliente(rs.getInt("idCliente"),rs.getString("nome"), rs.getString("email"), rs.getString("usuario"),
@@ -56,6 +54,22 @@ public class DAOCliente extends DAO {
 			System.err.println(e.getMessage());
 		}
 		return cliente;
+	}
+
+	public boolean login(String email, String pass) {
+		boolean resp = false;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM StorageSolutionsDB.cliente WHERE email like '" + email+"' and senha like '"+pass+"'";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				resp = true;
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return resp;
 	}
 
 	public List<Cliente> get() {
@@ -75,7 +89,7 @@ public class DAOCliente extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.cliente" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Cliente p = new Cliente(rs.getInt("idCliente"),rs.getString("nome"), rs.getString("email"), rs.getString("usuario"),
@@ -92,7 +106,7 @@ public class DAOCliente extends DAO {
 	public boolean update(Cliente cliente) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE cliente SET nome=?,email=?,usuario=?,senha=? WHERE idCliente = ?;";
+			String sql = "UPDATE StorageSolutionsDB.cliente SET nome=?,email=?,usuario=?,senha=? WHERE idCliente = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, cliente.getNome());
 			st.setString(2, cliente.getEmail());
@@ -112,7 +126,7 @@ public class DAOCliente extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM cliente WHERE idCliente = " + id);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.cliente WHERE idCliente = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

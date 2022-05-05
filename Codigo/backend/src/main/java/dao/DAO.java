@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.*;
 
+import utils.HashUtils;
+
 public class DAO {
 protected Connection conexao;
 	
@@ -12,7 +14,7 @@ protected Connection conexao;
 	public boolean conectar() {
 		String driverName = "org.postgresql.Driver";                    
 		String serverName = "localhost";
-		String mydatabase = "aplicacao";
+		String mydatabase = "StorageSolutionsDB";
 		int porta = 5432;
 		String url = "jdbc:postgresql://" + serverName + ":" + porta +"/" + mydatabase;
 		String username = "ti2cc";
@@ -23,11 +25,11 @@ protected Connection conexao;
 			Class.forName(driverName);
 			conexao = DriverManager.getConnection(url, username, password);
 			status = (conexao == null);
-			System.out.println("Conexão efetuada com o postgres!");
+			System.out.println("Conexï¿½o efetuada com o postgres!");
 		} catch (ClassNotFoundException e) { 
-			System.err.println("Conexão NÃO efetuada com o postgres -- Driver não encontrado -- " + e.getMessage());
+			System.err.println("Conexï¿½o Nï¿½O efetuada com o postgres -- Driver nï¿½o encontrado -- " + e.getMessage());
 		} catch (SQLException e) {
-			System.err.println("Conexão NÃO efetuada com o postgres -- " + e.getMessage());
+			System.err.println("Conexï¿½o Nï¿½O efetuada com o postgres -- " + e.getMessage());
 		}
 
 		return status;
@@ -46,14 +48,26 @@ protected Connection conexao;
 	}
 	
 	/**
-	 * Metódo de acesso ao sistema e funcionalidade de login
-	 * @param usuario - Usuário para localizar na base de dados
-	 * @param senha - Senha do usuário para procurar no Base de dados e validar a conexão
-	 * @return boolean verdadeiro caso encontre o usuário e falso caso não encontre
+	 * Metï¿½do de acesso ao sistema e funcionalidade de login
+	 * @param usuario - Usuï¿½rio para localizar na base de dados
+	 * @param senha - Senha do usuï¿½rio para procurar no Base de dados e validar a conexï¿½o
+	 * @return boolean verdadeiro caso encontre o usuï¿½rio e falso caso nï¿½o encontre
 	 */
-	public boolean login(String usuario, String senha) {
+	public boolean login(String email, String senha) {
 		boolean login = false;
-		
+		DAOCliente daoc = new DAOCliente();
+		DAOFornecedor daof = new DAOFornecedor();
+		System.out.println(senha);
+		senha = HashUtils.getHashMd5(senha);
+		System.out.println(senha);
+		if(daoc.login(email,senha)){
+			login = true;
+		}else if(daof.login(email,senha)){
+			login = true;
+		}else{
+			login = false;
+		}
+		System.out.println(login);
 		return login;
 	}
 
