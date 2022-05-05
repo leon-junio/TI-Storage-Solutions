@@ -89,6 +89,30 @@ public class DAOEstoque extends DAO {
 		return estoques;
 	}
 
+	public List<Estoque> getEstoquesUser(int id, int op) {
+		List<Estoque> estoques = new ArrayList<Estoque>();
+
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "";
+			if (op == 1) {
+				sql = "SELECT * FROM StorageSolutionsDB.estoque where cliente = " + id;
+			} else if (op == 2) {
+				sql = "SELECT * FROM StorageSolutionsDB.estoque where fornecedor = " + id;
+			}
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Estoque p = new Estoque(rs.getInt("idEstoque"), rs.getInt("capacidade"), rs.getInt("cliente"),
+						rs.getInt("fornecedor"), rs.getString("nome"));
+				estoques.add(p);
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return estoques;
+	}
+
 	public boolean update(Estoque estoque) {
 		boolean status = false;
 		try {

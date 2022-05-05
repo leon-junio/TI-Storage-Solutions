@@ -55,6 +55,23 @@ public class DAOCliente extends DAO {
 		}
 		return cliente;
 	}
+	
+	public Cliente get(String email,String pass) {
+		Cliente cliente = null;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM StorageSolutionsDB.cliente WHERE email like '" + email+"' and senha like '"+pass+"'";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				cliente = new Cliente(rs.getInt("idCliente"),rs.getString("nome"), rs.getString("email"), rs.getString("usuario"),
+						rs.getString("senha"));
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return cliente;
+	}
 
 	public boolean login(String email, String pass) {
 		boolean resp = false;

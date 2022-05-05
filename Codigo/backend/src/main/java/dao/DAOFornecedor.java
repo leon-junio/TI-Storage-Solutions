@@ -1,6 +1,7 @@
 package dao;
 
 
+import model.Cliente;
 import model.Fornecedor;
 import utils.HashUtils;
 import java.sql.PreparedStatement;
@@ -45,6 +46,23 @@ public class DAOFornecedor extends DAO {
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			String sql = "SELECT * FROM StorageSolutionsDB.fornecedor WHERE idFornecedor = " + id;
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				fornecedor = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
+						rs.getString("usuario"), rs.getString("senha"),rs.getString("tipoProduto"));
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return fornecedor;
+	}
+	
+	public Fornecedor get(String email,String pass) {
+		Fornecedor fornecedor = null;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM StorageSolutionsDB.fornecedor WHERE email like '" + email+"' and senha like '"+pass+"'";
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				fornecedor = new Fornecedor(rs.getInt("idFornecedor"), rs.getString("nome"), rs.getString("email"),
