@@ -33,21 +33,6 @@
             dataQuery.open('GET', 'http://localhost:6789/main/check/' + user.token);
             dataQuery.onload = checker;
             dataQuery.send();
-            let dataLoad = new XMLHttpRequest();
-            dataLoad.open('GET', 'http://localhost:6789/perfil/carregar/' + user.token);
-            dataLoad.onload = formBuilder;
-            dataLoad.send();
-        }
-
-        function formBuilder() {
-            let data = JSON.parse(this.responseText);
-            if (data.response != "null") {
-                let div = document.getElementById("form-user");
-                div.innerHTML(data.response);
-            } else {
-                alert("Erro ao tentar carregar o perfil para edição!");
-                window.location.href = "./home.html";
-            }
         }
 
         function checker() {
@@ -95,39 +80,41 @@
     </navbar>
 
     <main class="main container pt-5">
-        <h4 class="text-center mb-5">Minhas Informações</h4>
-        <form id="form-user" action="/perfil/atualizar" class="form">
+        <h4 class="text-center mb-5">Retirada de Produtos</h4>
+
+        <form action="/estoque/retirada" method="post" class="form">
+            <input type="hidden" id="id-token" class="fadeIn second" name="id-token" value="">
+            <input type="hidden" id="estoque" name="estoque" value="">
+
             <div class="row mb-3">
                 <div class="col-6">
-                    <label for="tipo" class="form-label">Tipo</label> <input type="text" name="tipo" id="tipo" class="form-control" required>
+                    <label for="produtos" class="form-label">Produtos</label>
+                    <select id="produtos" name="produtos" class="form-select" aria-label="Default select example">
+                        <option value="1">Produto 1</option>
+                        <option value="2">Produto 2</option>
+                        <option value="3">Produto 3</option>
+                    </select>
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col-6">
-                    <label for="nome" class="form-label">Nome</label> <input type="text" name="nome" id="nome" class="form-control">
-                </div>
-                <div class="col-6">
-                    <label for="email" class="form-label">Email</label> <input type="email" name="email" id="email" class="form-control">
+                    <label for="quantidade" class="form-label">Quantidade</label>
+                    <input type="number" name="quantidade" id="quantidade" class="form-control">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-6">
-                    <label for="usuario" class="form-label">Usuário</label> <input type="text" readonly disabled name="usuario" id="usuario" class="form-control">
+                    <label for="obs" class="form-label">Observações</label>
+                    <input type="text" name="obs" id="obs" class="form-control">
                 </div>
-            </div>
-            <div class="row mb-4">
-                <div class="col-6 d-flex justify-content-start align-items-end">
-                    <a href="./home-trocar-senha.html">
-                        <button type="button" class="btn btn-outline-primary p-3">Trocar
-							Senha</button>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-6">
-                    <button type="submit" class="btn btn-outline-success p-3">Atualizar
-						Dados</button>
+                    <label for="dtRetirada" class="form-label">Data da Retirada</label>
+                    <input type="date" name="dtRetirada" id="dtRetirada" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-outline-primary p-3">Retirar Produto</button>
                 </div>
             </div>
         </form>

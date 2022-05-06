@@ -33,13 +33,13 @@
             dataQuery.open('GET', 'http://localhost:6789/main/check/' + user.token);
             dataQuery.onload = checker;
             dataQuery.send();
-
             var url = window.location.href;
             if (url.includes("?id")) {
                 url = url.split('?id=');
                 url = url[1];
                 let dataLoad = new XMLHttpRequest();
-                dataLoad.open('GET', 'http://localhost:6789/produto/listar/' + url);
+                dataLoad.open('GET', 'http://localhost:6789/estoque/carregar/' +
+                    url);
                 dataLoad.onload = frontBuilder;
                 dataLoad.send();
             }
@@ -47,8 +47,8 @@
 
         function frontBuilder() {
             let data2 = JSON.parse(this.responseText);
-            let tblProdutos = document.getElementById("tblProdutos");
-            tblProdutos.innerHTML = data2.response;
+            let div = document.getElementById("cadestoque-form");
+            div.innerHTML = data2.response;
         }
 
         function checker() {
@@ -60,12 +60,14 @@
             } else {
                 document.getElementById("user-name").innerHTML = user.user;
                 $(document).ready(function() {
+                    $("#id-token").attr("value", user.token);
                     $("#exit").attr("href", "/main/logout/" + user.token);
                 });
             }
         }
     </script>
 </head>
+<!-- <body onload="ver()"> -->
 
 <body onload="ver()">
     <header class="header bg-light border-bottom">
@@ -97,97 +99,27 @@
     </navbar>
 
     <main class="main container pt-5">
-        <div class="row">
-            <div class="col-12">
-                <a href="./home-estoque.html">
-                    <button class="mb-4 px-4 py-2 btn btn-dark off">
-						<i class="fas fa-arrow-left"></i>
-					</button>
-                </a>
-            </div>
-        </div>
+        <h4 class="text-center mb-5">Cadastro de Estoque</h4>
+        <div id="cadestoque-form">
+            <form class="form" method="post" action="/estoque/cadastro">
+                <input type="hidden" id="id-token" class="fadeIn second" name="id-token" value="">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="nome" class="form-label">Nome do Estoque</label> <input type="text" name="nome" id="nome" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="capacidade" class="form-label">Capacidade de
+							Estoque</label> <input type="number" name="capacidade" id="capacidade" class="form-control">
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="col-12">
-                <h4 class="text-center mb-5">Lista de Produtos</h4>
-            </div>
-        </div>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody id="tblProdutos">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Estoque - Alimentos</td>
-                    <td>Estoque do armazém de carne....</td>
-                    <td>Marca teste</td>
-                    <td>130</td>
-                    <td class="d-flex align-items-center gap-5">
-                        <a href="./home-visualizar-produto.html">
-                            <button type="button" class="btn btn-outline-primary">
-								<i class="fas fa-eye"></i>
-							</button>
-                        </a>
-                        <button type="button" class="btn btn-outline-danger">
-							<i class="fas fa-trash"></i>
-						</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Estoque - Alimentos</td>
-                    <td>Estoque do armazém de carne....</td>
-                    <td>Marca teste</td>
-                    <td>130</td>
-                    <td class="d-flex align-items-center gap-5">
-                        <a href="./home-visualizar-produto.html">
-                            <button type="button" class="btn btn-outline-primary">
-								<i class="fas fa-eye"></i>
-							</button>
-                        </a>
-                        <button type="button" class="btn btn-outline-danger">
-							<i class="fas fa-trash"></i>
-						</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Estoque - Alimentos</td>
-                    <td>Estoque do armazém de carne....</td>
-                    <td>Marca teste</td>
-                    <td>130</td>
-                    <td class="d-flex align-items-center gap-5">
-                        <a href="./home-visualizar-produto.html">
-                            <button type="button" class="btn btn-outline-primary">
-								<i class="fas fa-eye"></i>
-							</button>
-                        </a>
-                        <button type="button" class="btn btn-outline-danger">
-							<i class="fas fa-trash"></i>
-						</button></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="div-button">
-            <a href="./home-form-produto.html">
-                <button class="p-4 btn-dark border-0" style="border-radius: .5rem">
-					<div class="row">
-						<div
-							class="col-4 d-flex justify-content-center align-items-center">
-							<i class="fas fa-plus text-white"></i>
-						</div>
-						<div class="col-8">Adicionar Produto</div>
-					</div>
-				</button>
-            </a>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-outline-primary p-3">Cadastrar
+							Estoque</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
