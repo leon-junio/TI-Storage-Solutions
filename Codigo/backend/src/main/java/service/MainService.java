@@ -25,30 +25,49 @@ public class MainService {
 	private final String home = "/pages/home.html";
 
 	public Object login(Request request, Response response) {
-		System.out.println("LOGIN INIT");
 		boolean resp = false;
 		String email = request.queryParams("email");
 		String senha = request.queryParams("senha");
+		senha = HashUtils.getHashMd5(senha);
 		resp = dao.login(email, senha);
-		System.out.println(resp);
 		if (resp) {
+			System.out.println("Novo login: " + email);
 			response.status(201);
 			return "<script src=\"" + app.Aplicacao.url + "/js/acess.js" + "\"></script>\n<script>loginSucess('" + email
-					+ "','" + HashUtils.getHashMd5(senha) + "','" + daotk.insert(email, senha) + "');\n" + "window.location.href = '"
+					+ "','" + senha + "','" + daotk.insert(email, senha) + "');\n" + "window.location.href = '"
 					+ app.Aplicacao.url + home + "';</script>";
 		} else {
-			// response.status(404);
 			response.status(203);
 			return "<script>alert(\"Falha ao realizar login no sistema!\"); " + "window.location.href = '"
 					+ app.Aplicacao.url + "/login.html';</script>";
 		}
 	}
 
+	public Object logout(Request request, Response response) {
+		boolean resp = false;
+		String token = request.params(":token");
+		DAOToken daotk = new DAOToken();
+		resp = daotk.delete(token);
+		if (resp) {
+			response.status(201);
+			return "<script src=\"" + app.Aplicacao.url + "/js/acess.js" + "\"></script>\n<script>logout();\n"
+					+ "window.location.href = '" + app.Aplicacao.url + "';</script>";
+		} else {
+			response.status(203);
+			return "<script>alert(\"Falha ao realizar logout no sistema!\"); " + "window.location.href = '"
+					+ app.Aplicacao.url + home + "';</script>";
+		}
+	}
+
 	public Object check(Request request, Response response) {
 		String token = request.params(":token");
-		response.header("Content-Type", "Json; charset=utf-8");
-		response.status(200);
-		return utils.LeonAPI.stringToJson("" + daotk.check(token));
+		if (!token.equals("null")) {
+			response.header("Content-Type", "Json; charset=utf-8");
+			response.status(200);
+			return utils.LeonAPI.stringToJson("" + daotk.check(token));
+		} else {
+			return utils.LeonAPI.stringToJson("" + daotk.check(null));
+		}
 	}
 
 	public Object listar(Request request, Response response) {
@@ -62,13 +81,14 @@ public class MainService {
 			if (prop == null) {
 				prop = new DAOToken().convertTokenFornecedor(token);
 				Fornecedor forn = (Fornecedor) prop;
-				estoques = daoe.getEstoquesUser(forn.getIdFornecedor(),1);
+				estoques = daoe.getEstoquesUser(forn.getIdFornecedor(), 1);
 			} else {
 				Cliente cli = (Cliente) prop;
-				estoques = daoe.getEstoquesUser(cli.getIdCliente(),2);
+				estoques = daoe.getEstoquesUser(cli.getIdCliente(), 2);
 			}
+			System.out.println(prop + " " + estoques);
 			if (prop == null || estoques == null) {
-				throw new RuntimeException("Erro em tempo de execuÁ„o!");
+				throw new RuntimeException("Erro em tempo de execu√ß√£o!");
 			}
 			if (estoques.size() > 0) {
 				response.status(200);
@@ -79,22 +99,23 @@ public class MainService {
 					resp += "<td>Estoque ativo!</td>\n";
 					resp += "<td>" + estoque.getCapacidade() + "</td>\n";
 					resp += "<td class=\"d-flex align-items-center gap-5\">\n";
-					resp += "<a href=\"./home-estoque.html\">";
+					resp += "<a href=\""+ app.Aplicacao.url + "/pages/home-estoque.html?name="+estoque.getNome()+"&&id=" + estoque.getIdEstoque() + "\">";
 					resp += "<button type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-eye\"></i></button>";
 					resp += "</a>";
-					resp += "<button type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button>";
-					resp += "<button type=\"button\" class=\"btn btn-outline-danger\"><i class=\"fas fa-trash\"></i></button>";
+					resp += "<a href=\"" + app.Aplicacao.url + "/pages/home-form-estoque.html?id="
+							+ estoque.getIdEstoque()
+							+ "\"><button type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button></a>";
+					resp +=  "<button onclick=\"pergunta('Deseja realmente excluir ?','/estoque/deletar/"+estoque.getIdEstoque()+"');\" type=\"button\" class=\"btn btn-outline-danger\"><i class=\"fas fa-trash\"></i></button>";
 					resp += "</td>";
 					resp += "</tr>\n";
 				}
 			} else {
-				response.status(203);
-				resp += "<tr><td>N„o existem estoques cadastrados</td></tr>";
+				throw new RuntimeException("Erro em tempo de execu√ß√£o!");
 			}
 			return utils.LeonAPI.stringToJson(resp);
 		} catch (RuntimeException e) {
-			response.status(404);
-			return utils.LeonAPI.stringToJson("ERRO INTERNO NO SISTEMA!");
+			response.status(203);
+			return utils.LeonAPI.stringToJson("<tr><td>N√£o existem estoques cadastrados</td></tr>");
 		}
 	}
 
