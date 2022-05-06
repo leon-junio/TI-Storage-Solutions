@@ -26,3 +26,8 @@ function getStr(){
 function onStart(){
 	writeInStorage(usuario);
 }
+
+function logout(){
+	onStart();
+	window.location.href = "../index.html";
+}
