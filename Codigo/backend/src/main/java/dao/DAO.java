@@ -2,8 +2,6 @@ package dao;
 
 import java.sql.*;
 
-import utils.HashUtils;
-
 public class DAO {
 protected Connection conexao;
 	
@@ -57,9 +55,6 @@ protected Connection conexao;
 		boolean login = false;
 		DAOCliente daoc = new DAOCliente();
 		DAOFornecedor daof = new DAOFornecedor();
-		System.out.println(senha);
-		senha = HashUtils.getHashMd5(senha);
-		System.out.println(senha);
 		if(daoc.login(email,senha)){
 			login = true;
 		}else if(daof.login(email,senha)){
@@ -67,8 +62,8 @@ protected Connection conexao;
 		}else{
 			login = false;
 		}
-		System.out.println(login);
 		return login;
 	}
+	
 
 }

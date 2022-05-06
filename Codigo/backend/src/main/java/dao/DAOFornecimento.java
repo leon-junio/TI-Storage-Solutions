@@ -21,7 +21,7 @@ public class DAOFornecimento extends DAO {
 	public boolean insert(FornecimentoProdutos fornecimento_produtos) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO fornecimento_produtos (produto,fornecedor,quantidade,fornecimento) "
+			String sql = "INSERT INTO StorageSolutionsDB.fornecimento_produtos (produto,fornecedor,quantidade,fornecimento) "
 					+ "VALUES (?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, fornecimento_produtos.getProduto());
@@ -42,7 +42,7 @@ public class DAOFornecimento extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM fornecimento_produtos WHERE produto = " + idp + " AND fornecedor =  " + idf;
+			String sql = "SELECT * FROM StorageSolutionsDB.fornecimento_produtos WHERE produto = " + idp + " AND fornecedor =  " + idf;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				fornecimento_produtos = new FornecimentoProdutos(rs.getInt("produto"), rs.getInt("fornecedor"),
@@ -72,7 +72,7 @@ public class DAOFornecimento extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM fornecimento_produtos"
+			String sql = "SELECT * FROM StorageSolutionsDB.fornecimento_produtos"
 					+ ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
@@ -90,7 +90,7 @@ public class DAOFornecimento extends DAO {
 	public boolean update(FornecimentoProdutos fornecimento_produtos) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE fornecimento_produtos SET quantidade=?,fornecimento=? WHERE produto = ? AND fornecedor = ? ;";
+			String sql = "UPDATE StorageSolutionsDB.fornecimento_produtos SET quantidade=?,fornecimento=? WHERE produto = ? AND fornecedor = ? ;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, fornecimento_produtos.getQuantidade());
 			st.setDate(2, fornecimento_produtos.getFornecimento());
@@ -109,7 +109,7 @@ public class DAOFornecimento extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM fornecimento_produtos WHERE produto = " + idp + " AND fornecedor =  " + idf);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.fornecimento_produtos WHERE produto = " + idp + " AND fornecedor =  " + idf);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

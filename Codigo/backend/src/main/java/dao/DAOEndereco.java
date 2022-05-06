@@ -21,7 +21,7 @@ public class DAOEndereco extends DAO {
 	public boolean insert(Endereco endereco) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO endereco (numero,cep,estado,pais,rua,bairro,cidade) " + "VALUES (?,?,?,?,?,?,?);";
+			String sql = "INSERT INTO StorageSolutionsDB.endereco (numero,cep,estado,pais,rua,bairro,cidade) " + "VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, endereco.getNumero());
 			st.setString(2, endereco.getCep());
@@ -44,7 +44,7 @@ public class DAOEndereco extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM endereco WHERE idEndereco = " + id;
+			String sql = "SELECT * FROM StorageSolutionsDB.endereco WHERE idEndereco = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				endereco = new Endereco(rs.getInt("idEndereco"),rs.getInt("numero"), rs.getString("cep"), rs.getString("estado"),
@@ -71,7 +71,7 @@ public class DAOEndereco extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM endereco" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.endereco" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Endereco p = new Endereco(rs.getInt("idEndereco"),rs.getInt("numero"), rs.getString("cep"), rs.getString("estado"),
@@ -88,7 +88,7 @@ public class DAOEndereco extends DAO {
 	public boolean update(Endereco endereco) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE endereco SET numero = ?,cep = ?,estado = ?,pais = ?,rua = ?,bairro = ?,cidade = ? WHERE idEndereco = ?;";
+			String sql = "UPDATE StorageSolutionsDB.endereco SET numero = ?,cep = ?,estado = ?,pais = ?,rua = ?,bairro = ?,cidade = ? WHERE idEndereco = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, endereco.getNumero());
 			st.setString(2, endereco.getCep());
@@ -111,7 +111,7 @@ public class DAOEndereco extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM endereco WHERE idEndereco = " + id);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.endereco WHERE idEndereco = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

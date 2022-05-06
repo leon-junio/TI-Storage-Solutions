@@ -21,7 +21,7 @@ public class DAOEntrada extends DAO {
 	public boolean insert(Entrada entrada) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO entrada (quantidade,estoque,produto,data_entrada) " + "VALUES (?,?,?,?);";
+			String sql = "INSERT INTO StorageSolutionsDB.entrada (quantidade,estoque,produto,data_entrada) " + "VALUES (?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, entrada.getQuantidade());
 			st.setInt(2, entrada.getEstoque());
@@ -41,7 +41,7 @@ public class DAOEntrada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM entrada WHERE idEntrada = " + id;
+			String sql = "SELECT * FROM StorageSolutionsDB.entrada WHERE idEntrada = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				entrada = new Entrada(rs.getInt("idEntrada"), rs.getInt("quantidade"), rs.getInt("estoque"),
@@ -68,7 +68,7 @@ public class DAOEntrada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM entrada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.entrada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Entrada p = new Entrada(rs.getInt("idEntrada"), rs.getInt("quantidade"), rs.getInt("estoque"),
@@ -85,7 +85,7 @@ public class DAOEntrada extends DAO {
 	public boolean update(Entrada entrada) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE entrada SET quantidade = ?,estoque = ?,produto = ?,data_entrada = ? WHERE idEntrada = ?;";
+			String sql = "UPDATE StorageSolutionsDB.entrada SET quantidade = ?,estoque = ?,produto = ?,data_entrada = ? WHERE idEntrada = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, entrada.getQuantidade());
 			st.setInt(2, entrada.getEstoque());
@@ -105,7 +105,7 @@ public class DAOEntrada extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM entrada WHERE idEntrada = " + id);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.entrada WHERE idEntrada = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

@@ -21,12 +21,20 @@ public class DAOEstoque extends DAO {
 	public boolean insert(Estoque estoque) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO estoque (capacidade,cliente,fornecedor,nome) " + "VALUES (?,?,?,?);";
+			String sql = "";
+			if (estoque.getCliente() == 0) {
+				sql = "INSERT INTO StorageSolutionsDB.estoque (capacidade,fornecedor,nome) " + "VALUES (?,?,?);";
+			} else {
+				sql = "INSERT INTO StorageSolutionsDB.estoque (capacidade,cliente,nome) " + "VALUES (?,?,?);";
+			}
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, estoque.getCapacidade());
-			st.setInt(2, estoque.getCliente());
-			st.setInt(3, estoque.getFornecedor());
-			st.setString(4, estoque.getNome());
+			if (estoque.getCliente() != 0) {
+				st.setInt(2, estoque.getCliente());
+			}else {
+				st.setInt(2, estoque.getFornecedor());
+			}
+			st.setString(3, estoque.getNome());
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -41,7 +49,7 @@ public class DAOEstoque extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM estoque WHERE idEstoque = " + id;
+			String sql = "SELECT * FROM StorageSolutionsDB.estoque WHERE idEstoque = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				estoque = new Estoque(rs.getInt("idEstoque"), rs.getInt("capacidade"), rs.getInt("cliente"),
@@ -75,7 +83,8 @@ public class DAOEstoque extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM estoque" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.estoque"
+					+ ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Estoque p = new Estoque(rs.getInt("idEstoque"), rs.getInt("capacidade"), rs.getInt("cliente"),
@@ -91,16 +100,17 @@ public class DAOEstoque extends DAO {
 
 	public List<Estoque> getEstoquesUser(int id, int op) {
 		List<Estoque> estoques = new ArrayList<Estoque>();
-
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			String sql = "";
 			if (op == 1) {
-				sql = "SELECT * FROM StorageSolutionsDB.estoque where cliente = " + id;
-			} else if (op == 2) {
 				sql = "SELECT * FROM StorageSolutionsDB.estoque where fornecedor = " + id;
+			} else if (op == 2) {
+				sql = "SELECT * FROM StorageSolutionsDB.estoque where cliente = " + id;
 			}
+
 			ResultSet rs = st.executeQuery(sql);
+
 			while (rs.next()) {
 				Estoque p = new Estoque(rs.getInt("idEstoque"), rs.getInt("capacidade"), rs.getInt("cliente"),
 						rs.getInt("fornecedor"), rs.getString("nome"));
@@ -116,13 +126,11 @@ public class DAOEstoque extends DAO {
 	public boolean update(Estoque estoque) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE estoque SET capacidade= ?,cliente= ?,fornecedor= ?,nome= ? WHERE idEstoque = ?;";
+			String sql = "UPDATE StorageSolutionsDB.estoque SET capacidade= ?,nome= ? WHERE idEstoque = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, estoque.getCapacidade());
-			st.setInt(2, estoque.getCliente());
-			st.setInt(3, estoque.getFornecedor());
-			st.setString(4, estoque.getNome());
-			st.setInt(5, estoque.getIdEstoque());
+			st.setString(2, estoque.getNome());
+			st.setInt(3, estoque.getIdEstoque());
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -136,7 +144,7 @@ public class DAOEstoque extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM estoque WHERE idEstoque = " + id);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.estoque WHERE idEstoque = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

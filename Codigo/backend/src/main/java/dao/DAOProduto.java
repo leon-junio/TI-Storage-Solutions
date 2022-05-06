@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Date;
+
 public class DAOProduto extends DAO {
 	public DAOProduto() {
 		super();
@@ -22,7 +24,7 @@ public class DAOProduto extends DAO {
 	public boolean insert(Produto produto) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO produto (quantidade,estoque,nome,descricao,codigoBarras,unidade,marca,peso,fabricacao,validade) "
+			String sql = "INSERT INTO StorageSolutionsDB.produto (quantidade,estoque,nome,descricao,codigoBarras,unidade,marca,peso,fabricacao,validade) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, produto.getQuantidade());
@@ -49,7 +51,7 @@ public class DAOProduto extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM produto WHERE idProduto = " + id;
+			String sql = "SELECT * FROM StorageSolutionsDB.produto WHERE idProduto = " + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				produto = new Produto(rs.getInt("idProduto"), rs.getInt("quantidade"), rs.getInt("estoque"),
@@ -85,7 +87,7 @@ public class DAOProduto extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM produto" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.produto" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Produto p = new Produto(rs.getInt("idProduto"), rs.getInt("quantidade"), rs.getInt("estoque"),
@@ -101,10 +103,34 @@ public class DAOProduto extends DAO {
 		return produtos;
 	}
 
+	public List<Produto> getProdutosEstoque(int id) throws Exception {
+		List<Produto> produtos = new ArrayList<Produto>();
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			ResultSet rs = st.executeQuery("SELECT * FROM StorageSolutionsDB.produtos where estoque = " + id);
+
+			while (rs.next()) {
+				Date fabricacao = utils.LeonAPI.formatDate(rs.getString("fabricacao"));
+				Date validade = utils.LeonAPI.formatDate(rs.getString("validade"));
+
+				Produto produto = new Produto(rs.getInt("idProduto"), rs.getInt("quantidade"), rs.getInt("estoque"), rs.getString("nome"), rs.getString("descricao"), 
+				rs.getString("codigoBarras"), rs.getString("unidade"), rs.getString("marca"), rs.getFloat("peso"), new java.sql.Date(fabricacao.getTime()), new java.sql.Date(validade.getTime()));
+
+				produtos.add(produto);
+			}
+
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return produtos;
+	}
+
 	public boolean update(Produto produto) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE produto SET quantidade= ?,estoque= ?,nome= ?,descricao= ?,codigoBarras= ?,unidade= ?,marca= ?"
+			String sql = "UPDATE StorageSolutionsDB.produto SET quantidade= ?,estoque= ?,nome= ?,descricao= ?,codigoBarras= ?,unidade= ?,marca= ?"
 					+ ",peso= ?,fabricacao= ?,validade= ?" + "WHERE idProduto = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, produto.getQuantidade());
@@ -131,7 +157,7 @@ public class DAOProduto extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM produto WHERE idProduto = " + id);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.produto WHERE idProduto = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

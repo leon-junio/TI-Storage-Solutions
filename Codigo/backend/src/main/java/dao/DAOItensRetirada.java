@@ -21,7 +21,7 @@ public class DAOItensRetirada extends DAO {
 	public boolean insert(ItemRetirada itensRetirada) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO Itens_Retirada (produto,retirada,quantidade) " + "VALUES (?,?,?);";
+			String sql = "INSERT INTO StorageSolutionsDB.Itens_Retirada (produto,retirada,quantidade) " + "VALUES (?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, itensRetirada.getProduto());
 			st.setInt(2, itensRetirada.getRetirada());
@@ -40,7 +40,7 @@ public class DAOItensRetirada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM Itens_Retirada WHERE produto = " + idp+" AND retirada = "+ret;
+			String sql = "SELECT * FROM StorageSolutionsDB.Itens_Retirada WHERE produto = " + idp+" AND retirada = "+ret;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				itensRetirada = new ItemRetirada(rs.getInt("produto"), rs.getInt("retirada"), rs.getInt("quantidade"));
@@ -62,7 +62,7 @@ public class DAOItensRetirada extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM Itens_Retirada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.Itens_Retirada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				ItemRetirada p = new ItemRetirada(rs.getInt("produto"), rs.getInt("retirada"), rs.getInt("quantidade"));
@@ -79,7 +79,7 @@ public class DAOItensRetirada extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM Itens_Retirada WHERE produto = " + idp+" AND retirada = "+ret);
+			st.executeUpdate("DELETE FROM StorageSolutionsDB.Itens_Retirada WHERE produto = " + idp+" AND retirada = "+ret);
 			st.close();
 			status = true;
 		} catch (SQLException u) {

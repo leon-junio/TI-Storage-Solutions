@@ -1,7 +1,6 @@
 package dao;
 
 
-import model.Cliente;
 import model.Fornecedor;
 import utils.HashUtils;
 import java.sql.PreparedStatement;
