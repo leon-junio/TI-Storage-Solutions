@@ -8,7 +8,7 @@ import service.*;
 public class Aplicacao {
 
 	private static ProdutoService produtoService = new ProdutoService();
-	private static HomeService homeService = new HomeService();
+	private static PerfilService perfilService = new PerfilService();
 	private static MainService mainService = new MainService();
 	private static ClienteService clienteService = new ClienteService();
 	private static FornecedorService fornecedorService = new FornecedorService();
@@ -26,48 +26,53 @@ public class Aplicacao {
 		if (securityService()) {
 			System.out.println("Servidor ONLINE :D");
 			/**
-			 * REQUISIÇÕES DOS SERVIÇOS DO MAIN
+			 * REQUISIÃ‡Ã•ES DOS SERVIÃ‡OS DO MAIN
 			 */
 			get("/main/check/:token", (request, response) -> mainService.check(request, response));
 			get("/main/listar/:token", (request, response) -> mainService.listar(request, response));
 			post("/main/login", (request, response) -> mainService.login(request, response));
 			post("/main/cadastro", (request, response) -> mainService.cadastro(request, response));
-
-			// CRIAR O WEBSERVICE AQUI!
-
-			/*
-			 * post("/produto/insert", (request, response) -> produtoService.insert(request,
-			 * response));
-			 * 
-			 * get("/produto/:id", (request, response) -> produtoService.get(request,
-			 * response));
-			 * 
-			 * get("/produto/list/:orderby", (request, response) ->
-			 * produtoService.getAll(request, response));
-			 * 
-			 * get("/produto/update/:id", (request, response) ->
-			 * produtoService.getToUpdate(request, response));
-			 * 
-			 * post("/produto/update/:id", (request, response) ->
-			 * produtoService.update(request, response));
-			 * 
-			 * get("/produto/delete/:id", (request, response) ->
-			 * produtoService.delete(request, response));
+			get("/main/logout/:token", (request, response) -> mainService.logout(request, response));
+			/**
+			 * REQUISIÃ‡Ã•ES DOS SERVIÃ‡OS DO ESTOQUE
 			 */
+			get("/estoque/deletar/:id", (request, response) ->estoqueService.delete(request, response));
+			post("/estoque/cadastro", (request, response) -> estoqueService.cadastro(request, response));
+			get("/estoque/carregar/:id", (request, response) ->estoqueService.carregar(request, response));
+			post("/estoque/atualizar", (request, response) -> estoqueService.atualizar(request, response));
+			//post("/estoque/retirada", (request, response) -> estoqueService.retirada(request, response));
+			//post("/estoque/entrada", (request, response) -> estoqueService.entrada(request, response));
+			
+			/**
+			 * REQUISIï¿½ï¿½ES DOS SERVIï¿½OS DE PRODUTO
+			 */
+			get("/produto/listar/:id", (request, response) -> produtoService.listar(request, response));
+			get("/produto/delete/:id", (request, response) -> produtoService.listar(request, response));
+			post("/produto/cadastro", (request, response) -> produtoService.cadastro(request, response));
+			//post("/produto/atualizar", (request, response) -> produtoService.atualizar(request, response));
+			//get("/produto/carregar/:id", (request, response) -> produtoService.carregar(request, response))
+			/**
+			 * REQUISIï¿½ï¿½ES DOS SERVIï¿½OS DA HOME e PERFIL
+			 */
+			get("/perfil/carregar/:token", (request, response) -> perfilService.carregar(request, response));
+			get("/perfil/delete/:token", (request, response) -> perfilService.deletar(request, response));
+			//post("/perfil/newsenha/:token", (request, response) -> perfilService.newpass(request, response));
+			post("/perfil/atualizar/:token", (request, response) -> perfilService.atualizar(request, response));
+
 		} else {
-			System.out.println("O servidor não pode iniciar e por isso sua execução foi abortada\n"
-					+ "Falha ao iniciar o sistema de segurança dos tokens!");
+			System.out.println("O servidor nï¿½o pode iniciar e por isso sua execuï¿½ï¿½o foi abortada\n"
+					+ "Falha ao iniciar o sistema de seguranï¿½a dos tokens!");
 			System.exit(0);
 		}
 
 	}
 
 	/**
-	 * Sistema de gerenciamento de segurança de tokens de usuários do serviço como
-	 * clientes, esse metódo inicia um sistema que limpa tokens antigos e inicia um
+	 * Sistema de gerenciamento de seguranï¿½a de tokens de usuï¿½rios do serviï¿½o como
+	 * clientes, esse metï¿½do inicia um sistema que limpa tokens antigos e inicia um
 	 * novo contador para a cada 24 horas limpar novamente!
 	 * 
-	 * @return status de execução do serviço --> apenas iniciar o server se rodar
+	 * @return status de execuï¿½ï¿½o do serviï¿½o --> apenas iniciar o server se rodar
 	 *         esse sistema
 	 */
 	private static boolean securityService() {
@@ -90,10 +95,10 @@ public class Aplicacao {
 	}
 
 	/**
-	 * Função que acessa o banco de dados e limpa a tabela por inteira
+	 * Funï¿½ï¿½o que acessa o banco de dados e limpa a tabela por inteira
 	 * 
 	 * @return status de limpeza
-	 * @throws Exception Caso ocorra erro ele lançara para o invocador
+	 * @throws Exception Caso ocorra erro ele lanï¿½ara para o invocador
 	 */
 	private static boolean clearTokens() throws Exception {
 		boolean status = false;
@@ -103,7 +108,7 @@ public class Aplicacao {
 	}
 
 	/**
-	 * Thread responsável por a cada 24 horas chamar a função de limpar a tabela de
+	 * Thread responsï¿½vel por a cada 24 horas chamar a funï¿½ï¿½o de limpar a tabela de
 	 * tokens
 	 * 
 	 * @throws Exception Caso ocorra erro evite iniciar o servidor
