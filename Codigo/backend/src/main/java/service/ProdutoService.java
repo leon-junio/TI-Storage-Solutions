@@ -20,7 +20,7 @@ public class ProdutoService {
 		String codigoBarras = request.queryParams("codBarras"); 
 		String unidade = request.queryParams("unidade"); 
 
-		int estoque = Integer.parseInt(request.queryParams("id-produto"));
+		int estoque = Integer.parseInt(request.queryParams("id-estoque"));
 
 		// pegar datas passadas como string
 		Date fabricacao = dateFormated.parse(request.queryParams("fabricacao")); 
@@ -34,18 +34,18 @@ public class ProdutoService {
 		if (resp) {
 			response.status(201);
 
-			return "<script>alert('Produto cadastrado com sucesso!'); window.location.href = '" + app.Aplicacao.url + "/pages/home-produtos.html';</script>";
+			return "<script>alert('Produto cadastrado com sucesso!'); window.location.href = '" + app.Aplicacao.url + "/pages/home-produtos.html?id=" + estoque + "';</script>";
 		} else {
 			response.status(203);
 
 			return "<script>alert('Não foi possível cadastrar o Produto!'); window.location.href = '"
-					+ app.Aplicacao.url + "/pages/home-form-produto.html';</script>";
+					+ app.Aplicacao.url + "/pages/home-form-produto.html?id=" + estoque + "';</script>";
 		}
 	}
 
 	public Object listar(Request request, Response response) {
 		try {
-			int estoque = Integer.parseInt(request.params(":estoque"));
+			int estoque = Integer.parseInt(request.params(":id"));
 			response.header("Content-Type", "Json; charset=utf-8");
 
 			String resp = "";
@@ -70,7 +70,7 @@ public class ProdutoService {
 					resp += "<td>" + produto.getMarca() + "</td>\n";
 					resp += "<td>" + produto.getQuantidade() + "</td>\n";
 					resp += "<td class=\"d-flex align-items-center gap-5\">\n";
-					resp += "<a href=\"./home-visualizar-produto\">";
+					resp += "<a href=\"./home-form-produto.html?idproduto=" + produto.getIdProduto() + "\">";
 					resp += "<button type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-eye\"></i></button>";
 					resp += "</a>";
 					resp += "<a href=\"/produto/deletar/" + produto.getIdProduto() + "\"><button type=\"button\" class=\"btn btn-outline-danger\"><i class=\"fas fa-trash\"></i></button></a>";
@@ -109,6 +109,7 @@ public class ProdutoService {
 			resp = "<form class=\"form\" method=\"post\" action=\"/produto/atualizar\">"
 					+ "<input type=\"hidden\" id=\"id-produto\" class=\"fadeIn second\" name=\"id-produto\" value=\""
 					+ obj.getIdProduto() + "\">"
+					+ "<input type=\"hidden\" id=\"id-estoque\" name=\"id-estoque\" value\"" + obj.getEstoque() + "\">"
 					+ "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"nome\" class=\"form-label\">Nome do Produto</label>"
 					+ "<input type=\"text\" name=\"nome\" id=\"nome\" class=\"form-control\" value=\"" + obj.getNome()
 					+ "\"></div><div class=\"col-6\">"
@@ -128,9 +129,9 @@ public class ProdutoService {
 					+ "class=\"form-control\" value=\"" + utils.LeonAPI.formatHoras(obj.getFabricacao()) + "\"></div></div>"
 
 					+ "<div class=\"row mb-3\"><label for=\"validade\" class=\"form-label\">Ano de Validade</label>"
-					+ "<input type=\"number\" name=\"validade\" id=\"validade\" class=\"form-control\" "
+					+ "<input type=\"date\" name=\"validade\" id=\"validade\" class=\"form-control\" "
 					+ "value=\"" + utils.LeonAPI.formatHoras(obj.getValidade()) + "\"></div><div class=\"col-6\">"
-					+ "<label for=\"marca\" class=\"form-label\">Marca do Produto</label><input type=\"date\" name=\"marca\" id=\"marca\" " 
+					+ "<label for=\"marca\" class=\"form-label\">Marca do Produto</label><input type=\"number\" name=\"marca\" id=\"marca\" " 
 					+ "class=\"form-control\" value=\"" + obj.getMarca() + "\"></div></div>"
 
 					+ "<div class=\"row mb-3\"><label for=\"peso\" class=\"form-label\">Peso</label>"
@@ -142,7 +143,7 @@ public class ProdutoService {
 			return utils.LeonAPI.stringToJson(resp);
 		} catch (RuntimeException e) {
 			response.status(203);
-			return utils.LeonAPI.stringToJson("<tr><td>Não existem produtos cadastrados</td></tr>");
+			return utils.LeonAPI.stringToJson("null");
 		}
 	}
 
