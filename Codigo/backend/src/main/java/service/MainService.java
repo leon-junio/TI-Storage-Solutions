@@ -12,6 +12,7 @@ import dao.DAOFornecedor;
 
 // imports da Model 
 import model.Cliente;
+import model.Estoque;
 import model.Fornecedor;
 
 import spark.Request;
@@ -59,6 +60,8 @@ public class MainService {
 		}
 	}
 
+	
+	
 	public Object check(Request request, Response response) {
 		String token = request.params(":token");
 		if (!token.equals("null")) {
@@ -70,13 +73,18 @@ public class MainService {
 		}
 	}
 
+	
+	
+	
+	
+	
 	public Object listar(Request request, Response response) {
 		try {
 			String token = request.params(":token");
 			response.header("Content-Type", "Json; charset=utf-8");
 			String resp = "";
 			DAOEstoque daoe = new DAOEstoque();
-			List<model.Estoque> estoques = null;
+			List<Estoque> estoques = null;
 			Object prop = new DAOToken().convertTokenCliente(token);
 			if (prop == null) {
 				prop = new DAOToken().convertTokenFornecedor(token);
@@ -99,7 +107,7 @@ public class MainService {
 					resp += "<td>Estoque ativo!</td>\n";
 					resp += "<td>" + estoque.getCapacidade() + "</td>\n";
 					resp += "<td class=\"d-flex align-items-center gap-5\">\n";
-					resp += "<a href=\""+ app.Aplicacao.url + "/pages/home-estoque.html?name="+estoque.getNome()+"&&id=" + estoque.getIdEstoque() + "\">";
+					resp += "<a href=\""+ app.Aplicacao.url + "/pages/home-estoque.html?name="+estoque.getNome()+"&id=" + estoque.getIdEstoque() + "\">";
 					resp += "<button type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-eye\"></i></button>";
 					resp += "</a>";
 					resp += "<a href=\"" + app.Aplicacao.url + "/pages/home-form-estoque.html?id="
