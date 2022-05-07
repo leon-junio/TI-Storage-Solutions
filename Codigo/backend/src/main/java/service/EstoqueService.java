@@ -77,11 +77,11 @@ public class EstoqueService {
 		if (daoe.delete(idEstoque)) {
 			response.status(200);
 			return "<script>alert('Estoque foi excluído com sucesso!'); window.location.href = '" + app.Aplicacao.url
-					+ "/pages/home.html";
+					+ "/pages/home.html'</script>";
 		} else {
 			response.status(203);
 			return "<script>alert('Não foi possível excluir o estoque!'); window.location.href = '"
-					+ app.Aplicacao.url + "/pages/home.html";
+					+ app.Aplicacao.url + "/pages/home.html'<script>";
 		}
 	}
 
