@@ -98,8 +98,8 @@ public class DAOEstoque extends DAO {
 		return estoques;
 	}
 
-	public List<Estoque> getEstoquesUser(int id, int op) {
-		List<Estoque> estoques = new ArrayList<Estoque>();
+	public ArrayList<Estoque> getEstoquesUser(int id, int op) {
+		ArrayList<Estoque> estoques = new ArrayList<Estoque>();
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			String sql = "";

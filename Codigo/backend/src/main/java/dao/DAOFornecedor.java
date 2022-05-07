@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class DAOFornecedor extends DAO {
 	public DAOFornecedor() {
@@ -124,14 +125,12 @@ public class DAOFornecedor extends DAO {
 	public boolean update(Fornecedor fornecedor) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE StorageSolutionsDB.fornecedor SET nome=?,email=?,usuario=?,senha=? WHERE idFornecedor = ?;";
+			String sql = "UPDATE StorageSolutionsDB.fornecedor SET nome=?,email=?,usuario=? WHERE idFornecedor = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, fornecedor.getNome());
 			st.setString(2, fornecedor.getEmail());
-			st.setString(3, fornecedor.getUsuario());
-			st.setString(4, HashUtils.getHashMd5(fornecedor.getSenha()));
-			st.setString(5, fornecedor.getTipoProduto());
-			st.setInt(6, fornecedor.getIdFornecedor());
+			st.setString(3, fornecedor.getNome()+ "@" + UUID.randomUUID().toString().substring(0, 7));
+			st.setInt(4, fornecedor.getIdFornecedor());
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -140,6 +139,25 @@ public class DAOFornecedor extends DAO {
 		}
 		return status;
 	}
+
+
+
+	public boolean updatePass(Fornecedor fornecedor,String senha) {
+		boolean status = false;
+		try {
+			String sql = "UPDATE StorageSolutionsDB.fornecedor SET senha=? WHERE idFornecedor = ?;";
+			PreparedStatement st = conexao.prepareStatement(sql);
+			st.setString(1, HashUtils.getHashMd5(senha));
+			st.setInt(2, fornecedor.getIdFornecedor());
+			st.executeUpdate();
+			st.close();
+			status = true;
+		} catch (SQLException u) {
+			throw new RuntimeException(u);
+		}
+		return status;
+	}
+
 
 	public boolean delete(int id) {
 		boolean status = false;

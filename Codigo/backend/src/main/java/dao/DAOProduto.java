@@ -108,7 +108,7 @@ public class DAOProduto extends DAO {
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
-			ResultSet rs = st.executeQuery("SELECT * FROM StorageSolutionsDB.produtos where estoque = " + id);
+			ResultSet rs = st.executeQuery("SELECT * FROM StorageSolutionsDB.produto where estoque = " + id);
 
 			while (rs.next()) {
 				Date fabricacao = utils.LeonAPI.formatDate(rs.getString("fabricacao"));

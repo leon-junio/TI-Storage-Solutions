@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class DAOCliente extends DAO {
 	public DAOCliente() {
@@ -123,13 +124,12 @@ public class DAOCliente extends DAO {
 	public boolean update(Cliente cliente) {
 		boolean status = false;
 		try {
-			String sql = "UPDATE StorageSolutionsDB.cliente SET nome=?,email=?,usuario=?,senha=? WHERE idCliente = ?;";
+			String sql = "UPDATE StorageSolutionsDB.cliente SET nome=?,email=?,usuario=? WHERE idCliente = ?;";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, cliente.getNome());
 			st.setString(2, cliente.getEmail());
-			st.setString(3, cliente.getUsuario());
-			st.setString(4, HashUtils.getHashMd5(cliente.getSenha()));
-			st.setInt(5,cliente.getIdCliente());
+			st.setString(3, cliente.getNome()+ "@" + UUID.randomUUID().toString().substring(0, 7));
+			st.setInt(4,cliente.getIdCliente());
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -138,6 +138,24 @@ public class DAOCliente extends DAO {
 		}
 		return status;
 	}
+
+
+	public boolean updatePass(Cliente cliente,String senha) {
+		boolean status = false;
+		try {
+			String sql = "UPDATE StorageSolutionsDB.cliente SET senha=? WHERE idCliente = ?;";
+			PreparedStatement st = conexao.prepareStatement(sql);
+			st.setString(1, HashUtils.getHashMd5(senha));
+			st.setInt(2,cliente.getIdCliente());
+			st.executeUpdate();
+			st.close();
+			status = true;
+		} catch (SQLException u) {
+			throw new RuntimeException(u);
+		}
+		return status;
+	}
+
 
 	public boolean delete(int id) {
 		boolean status = false;
