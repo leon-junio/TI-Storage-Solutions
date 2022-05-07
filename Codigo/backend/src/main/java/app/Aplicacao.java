@@ -10,7 +10,6 @@ public class Aplicacao {
 	private static ProdutoService produtoService = new ProdutoService();
 	private static PerfilService perfilService = new PerfilService();
 	private static MainService mainService = new MainService();
-	private static ClienteService clienteService = new ClienteService();
 	private static FornecedorService fornecedorService = new FornecedorService();
 	private static EstoqueService estoqueService = new EstoqueService();
 	public static final int porta = 6789;
@@ -47,16 +46,16 @@ public class Aplicacao {
 			 * REQUISI��ES DOS SERVI�OS DE PRODUTO
 			 */
 			get("/produto/listar/:id", (request, response) -> produtoService.listar(request, response));
-			get("/produto/delete/:id", (request, response) -> produtoService.listar(request, response));
+			get("/produto/deletar/:id", (request, response) -> produtoService.listar(request, response));
 			post("/produto/cadastro", (request, response) -> produtoService.cadastro(request, response));
-			//post("/produto/atualizar", (request, response) -> produtoService.atualizar(request, response));
-			//get("/produto/carregar/:id", (request, response) -> produtoService.carregar(request, response))
+			post("/produto/atualizar", (request, response) -> produtoService.atualizar(request, response));
+			get("/produto/carregar/:id", (request, response) -> produtoService.carregar(request, response));
 			/**
 			 * REQUISI��ES DOS SERVI�OS DA HOME e PERFIL
 			 */
 			get("/perfil/carregar/:token", (request, response) -> perfilService.carregar(request, response));
 			get("/perfil/delete/:token", (request, response) -> perfilService.deletar(request, response));
-			//post("/perfil/newsenha/:token", (request, response) -> perfilService.newpass(request, response));
+			post("/perfil/newsenha/:token", (request, response) -> perfilService.newPass(request, response));
 			post("/perfil/atualizar/:token", (request, response) -> perfilService.atualizar(request, response));
 
 		} else {
