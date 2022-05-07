@@ -96,15 +96,22 @@
                 $(document).ready(function() {
                     $("#exit").attr("href", "/main/logout/" + user.token);
                     var url = window.location.href;
-                    if (url.includes("?id")) {
-                        url = url.split('?id=');
+                    if (url.includes("id")) {
+                        url = url.split('id=');
                         let id = url[1];
-                        $('#btnListProdutos').attr("href", `./home-produtos.html?id=${id}`)
+                        // console.log(id);
+                        $("#link-prod").attr("href", `./home-produtos.html?id=${id}`);
+                        //document.getElementById('').href = `./home-produtos.html?id=${id}`;
                     }
+                    url = window.location.href;
                     if (url.includes("?name")) {
                         url = url.split('?name=');
                         let txt = url[1];
-                        let div = getElementById();
+                        console.log(txt);
+                        txt = txt.substring(0, txt.indexOf('?'));
+                        console.log(txt);
+                        let div = document.getElementById("name-st");
+                        div.innerHTML = txt;
                     }
                 });
             }
@@ -175,7 +182,7 @@
                 </a>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-                <a id="btnListProdutos" href="./home-produtos.html" style="text-decoration: none !important;">
+                <a id="link-prod" href="" style="text-decoration: none !important;">
                     <div class="card-counter btn-danger">
                         <div class="row">
                             <div class="col-3">

@@ -35,8 +35,8 @@
             dataQuery.send();
 
             var url = window.location.href;
-            if (url.includes("?id")) {
-                url = url.split('?id=');
+            if (url.includes("id")) {
+                url = url.split('id=');
                 url = url[1];
                 let dataLoad = new XMLHttpRequest();
                 dataLoad.open('GET', 'http://localhost:6789/produto/listar/' + url);
@@ -61,6 +61,18 @@
                 document.getElementById("user-name").innerHTML = user.user;
                 $(document).ready(function() {
                     $("#exit").attr("href", "/main/logout/" + user.token);
+                    let url = window.location.href;
+                    console.log(url);
+                    if (url.includes("id")) {
+                        url = url.split('id=');
+                        console.log(url);
+                        let id = url[1];
+                        console.log(id);
+                        $("#link-back").attr("href", `./home-estoque.html?id=${id}`);
+                        $("#linkAddProdutos").attr("href", `./home-form-produto.html?id=${id}`);
+                        //document.getElementById('link-back').href = `./home-estoque.html?id=${id}`;
+                        // document.getElementById('linkListProdutos').href = `./home-produtos.html?id=${id}`;
+                    }
                 });
             }
         }
@@ -99,7 +111,7 @@
     <main class="main container pt-5">
         <div class="row">
             <div class="col-12">
-                <a href="./home-estoque.html">
+                <a id="link-back" href="./home-estoque.html">
                     <button class="mb-4 px-4 py-2 btn btn-dark off">
 						<i class="fas fa-arrow-left"></i>
 					</button>
@@ -126,58 +138,13 @@
             </thead>
             <tbody id="tblProdutos">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Estoque - Alimentos</td>
-                    <td>Estoque do armazém de carne....</td>
-                    <td>Marca teste</td>
-                    <td>130</td>
-                    <td class="d-flex align-items-center gap-5">
-                        <a href="./home-visualizar-produto.html">
-                            <button type="button" class="btn btn-outline-primary">
-								<i class="fas fa-eye"></i>
-							</button>
-                        </a>
-                        <button type="button" class="btn btn-outline-danger">
-							<i class="fas fa-trash"></i>
-						</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Estoque - Alimentos</td>
-                    <td>Estoque do armazém de carne....</td>
-                    <td>Marca teste</td>
-                    <td>130</td>
-                    <td class="d-flex align-items-center gap-5">
-                        <a href="./home-visualizar-produto.html">
-                            <button type="button" class="btn btn-outline-primary">
-								<i class="fas fa-eye"></i>
-							</button>
-                        </a>
-                        <button type="button" class="btn btn-outline-danger">
-							<i class="fas fa-trash"></i>
-						</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Estoque - Alimentos</td>
-                    <td>Estoque do armazém de carne....</td>
-                    <td>Marca teste</td>
-                    <td>130</td>
-                    <td class="d-flex align-items-center gap-5">
-                        <a href="./home-visualizar-produto.html">
-                            <button type="button" class="btn btn-outline-primary">
-								<i class="fas fa-eye"></i>
-							</button>
-                        </a>
-                        <button type="button" class="btn btn-outline-danger">
-							<i class="fas fa-trash"></i>
-						</button></td>
+                    <td colspan="6">CARREGANDO</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="div-button">
-            <a href="./home-form-produto.html">
+            <a id="linkAddProdutos" href="./home-form-produto.html">
                 <button class="p-4 btn-dark border-0" style="border-radius: .5rem">
 					<div class="row">
 						<div

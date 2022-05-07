@@ -33,6 +33,23 @@
             dataQuery.open('GET', 'http://localhost:6789/main/check/' + user.token);
             dataQuery.onload = checker;
             dataQuery.send();
+
+            let url = window.location.href;
+            if (url.includes("?idproduto=")) {
+                url = url.split('?idproduto=');
+                let id = url[1];
+                let dataLoad = new XMLHttpRequest();
+                dataLoad
+                    .open('GET', 'http://localhost:6789/produto/carregar/' + id);
+                dataLoad.onload = frontBuilder;
+                dataLoad.send();
+            }
+        }
+
+        function frontBuilder() {
+            let data2 = JSON.parse(this.responseText);
+            let div = document.getElementById("form-produto");
+            div.innerHTML = data2.response;
         }
 
         function checker() {
@@ -43,9 +60,24 @@
                 window.location.href = "../index.html";
             } else {
                 document.getElementById("user-name").innerHTML = user.user;
-                $(document).ready(function() {
-                    $("#exit").attr("href", "/main/logout/" + user.token);
-                });
+                $(document)
+                    .ready(
+                        function() {
+                            $("#exit").attr("href",
+                                "/main/logout/" + user.token);
+
+                            let url = window.location.href;
+
+                            if (url.includes("?id")) {
+                                url = url.split('id=');
+                                let id = url[1];
+
+                                document.getElementById('id-estoque').value = id;
+                                document.getElementById('link-back').href = `./home-produtos.html?id=${id}`;
+                            } else {
+                                window.location.href = './home-estoque.html';
+                            }
+                        });
             }
         }
     </script>
@@ -74,76 +106,128 @@
 					class='fas fa-bars'></i> Dashbord</a></li>
             </ul>
 
-            <a id="exit" href=""><button class="py-3 px-4 btn btn-outline-light">
-			<i class="fa fa-sign-out"></i> Sair
-		</button></a>
+            <a id="exit" href=""><button
+				class="py-3 px-4 btn btn-outline-light">
+				<i class="fa fa-sign-out"></i> Sair
+			</button></a>
         </div>
     </navbar>
 
     <main class="main container pt-5">
-        <h4 class="text-center mb-5">Cadastro de Produto</h4>
-
-        <form id="cadestoque-form" class="form" method="post" action="/produto/cadastro">
-            <input type="hidden" id="id-token" class="fadeIn second" name="id-token" value="">
-            <input type="hidden" id="estoque" name="estoque" value="">
-
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="nome" class="form-label">Nome do Produto</label>
-                    <input type="text" name="nome" id="nome" class="form-control">
-                </div>
-                <div class="col-6">
-                    <label for="descricao" class="form-label">Descrição do Produto</label>
-                    <input type="text" name="descricao" id="descricao" class="form-control">
-                </div>
+        <div class="row">
+            <div class="col-12">
+                <a id="link-back" href="./home-produtos.html">
+                    <button class="mb-4 px-4 py-2 btn btn-dark off">
+						<i class="fas fa-arrow-left"></i>
+					</button>
+                </a>
             </div>
+        </div>
 
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="quantidade" class="form-label">Quantidade</label>
-                    <input type="number" name="quantidade" id="quantidade" class="form-control">
-                </div>
-                <div class="col-6">
-                    <label for="codBarras" class="form-label">Código de Barras</label>
-                    <input type="text" name="codBarras" id="codBarras" class="form-control">
-                </div>
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center mb-5">Cadastro de Produto</h4>
             </div>
+        </div>
 
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="unidade" class="form-label">Unidade</label>
-                    <input type="number" name="unidade" id="unidade" class="form-control">
-                </div>
-                <div class="col-6">
-                    <label for="fabricacao" class="form-label">Ano de Fabricação</label>
-                    <input type="date" name="fabricacao" id="fabricacao" class="form-control">
-                </div>
-            </div>
+        <div id="form-produto">
+            <form class="form" method="post" action="/produto/cadastro">
+                <input type="hidden" id="id-estoque" name="id-estoque" value="">
 
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="validade" class="form-label">Ano de Validade</label>
-                    <input type="number" name="validade" id="validade" class="form-control">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="nome" class="form-label">Nome do Produto</label> <input type="text" name="nome" id="nome" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="descricao" class="form-label">Descrição do
+							Produto</label> <input type="text" name="descricao" id="descricao" class="form-control">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <label for="marca" class="form-label">Marca do Produto</label>
-                    <input type="date" name="marca" id="marca" class="form-control">
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="peso" class="form-label">Peso</label>
-                    <input type="number" min="0" max="100" step=".01" name="peso" id="peso" class="form-control">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="quantidade" class="form-label">Quantidade</label> <input type="number" name="quantidade" id="quantidade" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="codBarras" class="form-label">Código de Barras</label>
+                        <input type="text" name="codBarras" id="codBarras" class="form-control">
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-6">
-                    <button type="submit" id="btnForm" class="btn btn-outline-primary p-3">Adicionar Produto</button>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="unidade" class="form-label">Unidade</label>
+                        <select id="unidade" name="unidade" class="form-select">
+                            <option value="AMPOLA">AMPOLA</option>
+							<option value="BARRA">BARRA</option>
+							<option value="BOMBONA">BOMBONA</option>
+							<option value="BISNAGA">BISNAGA</option>
+							<option value="CAIXA">CAIXA</option>
+							<option value="CARRETEL">CARRETEL</option>
+							<option value="CENTO">CENTO</option>
+							<option value="CENTIMETRO">CENTIMETRO</option>
+							<option value="CONJUNTO">CONJUNTO</option>
+							<option value="CHAPA">CHAPA</option>
+							<option value="DUZIA">DUZIA</option>
+							<option value="DOSE">DOSE</option>
+							<option value="EMBALAGEM">EMBALAGEM</option>
+							<option value="ENGRADADO">ENGRADADO</option>
+							<option value="ESTOJO">ESTOJO</option>
+							<option value="FARDO">FARDO</option>
+							<option value="FRASCO">FRASCO</option>
+							<option value="GALÃO">GALÃO</option>
+							<option value="GRAMA">GRAMA</option>
+							<option value="JOGO">JOGO</option>
+							<option value="LATA">LATA</option>
+							<option value="LITRO">LITRO</option>
+							<option value="METRO">METRO</option>
+							<option value="MILHEIRO">MILHEIRO</option>
+							<option value="M²">M²</option>
+							<option value="M³">M³</option>
+							<option value="PACOTE">PACOTE</option>
+							<option value="PALLET">PALLET</option>
+							<option value="PAR">PAR</option>
+							<option value="PEÇA">PEÇA</option>
+							<option value="QUILO">QUILO</option>
+							<option value="RESMA">RESMA</option>
+							<option value="ROLO">ROLO</option>
+							<option value="SACHE">SACHE</option>
+							<option value="SACO">SACO</option>
+							<option value="SERINGA">SERINGA</option>
+							<option value="TONELADA">TONELADA</option>
+							<option value="TUBO">TUBO</option>
+							<option value="UNIDADE">UNIDADE</option>
+							<option value="VOLUME">VOLUME</option>
+						</select>
+                    </div>
+                    <div class="col-6">
+                        <label for="fabricacao" class="form-label">Ano de
+							Fabricação</label> <input type="date" name="fabricacao" id="fabricacao" class="form-control">
+                    </div>
                 </div>
-            </div>
-        </form>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="validade" class="form-label">Ano de Validade</label> <input type="date" name="validade" id="validade" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="marca" class="form-label">Marca do Produto</label> <input type="number" name="marca" id="marca" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="peso" class="form-label">Peso</label> <input type="number" min="0" max="100" step=".01" name="peso" id="peso" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <button type="submit" id="btnForm" class="btn btn-outline-primary p-3">Adicionar Produto</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
