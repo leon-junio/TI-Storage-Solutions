@@ -24,7 +24,7 @@ public class PerfilService {
             String tipo = request.queryParams("tipo");
             Cliente cl = null;
             Fornecedor fr = null;
-            if (tipo.equalsIgnoreCase("Cliente")) {
+            if (tipo.equalsIgnoreCase("Comerciante")) {
                 cl = (Cliente) new DAOToken().convertTokenCliente(token);
                 cl.setEmail(email);
                 cl.setNome(nome);
@@ -39,11 +39,11 @@ public class PerfilService {
                 return "<script src=\"" + Aplicacao.url
                         + "/js/acess.js\"></script><script>alert('USUARIO ALTERADO COM SUCESSO, POR FAVOR REALIZE LOGIN NOVAMENTE!');logout();</script>";
             } else {
-                return "<script>alert('UM ERRO IMPEDIU QUE O USUARIO FOSSE ALTERADO');window.location.href = \""
-                        + Aplicacao.url + "/pages/home-usuarios.html\";</script>";
+                throw new Exception("Erro de validação interna");
             }
         } catch (Exception e) {
-            return "<script>alert('UM ERRO IMPEDIU QUE O USUARIO FOSSE ALTERADO');window.location.href = \""
+        	e.printStackTrace();
+            return "<script>alert('UM ERRO IMPEDIU QUE O USUARIO FOSSE ALTERADO - erro: "+e.getMessage()+"');window.location.href = \""
                     + Aplicacao.url + "/pages/home-usuarios.html\";</script>";
         }
     }
@@ -135,7 +135,7 @@ public class PerfilService {
             if (cli != null) {
                 resp = "<form id=\"form-user\" method=\"post\" action=\"/perfil/atualizar/" + token
                         + "\" class=\"form\">" +
-                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Cliente\" disabled readonly>"
+                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Comerciante\" readonly>"
                         +
                         "<div class=\"col-6\"><label for=\"nome\" class=\"form-label\">Nome</label> <input type=\"text\" name=\"nome\" id=\"nome\" value=\""
                         + cli.getNome() + "\" class=\"form-control\">"
@@ -158,7 +158,7 @@ public class PerfilService {
             if (forn != null) {
                 resp = "<form id=\"form-user\" method=\"post\" action=\"/perfil/atualizar/" + token
                         + "\" class=\"form\">" +
-                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Fornecedor\" disabled readonly>"
+                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Fornecedor\" disabled>"
                         +
                         "</div></div><div class=\"row mb-3\"><div class=\"col-6\"><label for=\"nome\" class=\"form-label\">Nome</label> <input type=\"text\" name=\"nome\" id=\"nome\" value=\""
                         + forn.getNome() + "\" class=\"form-control\">"
@@ -169,13 +169,13 @@ public class PerfilService {
                         "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"usuario\" class=\"form-label\">Usuário</label> <input type=\"text\" readonly disabled name=\"usuario\" id=\"usuario\" class=\"form-control\" value=\""
                         + forn.getUsuario() + "\"></div>"
                         +
-                        "</div><div class=\"row mb-4\"><div class=\"col-6 d-flex justify-content-start align-items-end\"><a href=\"./home-trocar-senha.html\"><button type=\"button\" class=\"btn btn-outline-primary p-3\">Trocar"
+                        "</div><div class=\"row mb-3\"><a href=\"./home-trocar-senha.html\"><button type=\"button\" class=\"btn btn-outline-primary p-3\">Trocar "
                         +
-                        "Senha</button></a></div></div><div class=\"row\"><div class=\"col-6\"><button type=\"submit\" class=\"btn btn-outline-success p-3\">AtualizarDados</button> </div></div>"
+                        "Senha</button></a></div><div class=\"row\"><div class=\"col-6\"><button type=\"submit\" class=\"btn btn-outline-success p-3\">Atualizar Dados</button> </div></div><br>"
                         +
-                        "<button onclick=\"pergunta('Deseja realmente excluir todos os seus dados ?','/perfil/deletar/"
+                        "<div class=\"row\"><hr><div class=\"row mb-3\"><div class=\"col-6\"><button onclick=\"pergunta('Deseja realmente excluir todos os seus dados ?','/perfil/deletar/"
                         + token
-                        + "');\" type=\"button\" class=\"btn btn-outline-danger\"> EXCLUIR PERFIL ?<i class=\"fas fa-trash\"></i></button></form>";
+                        + "');\" type=\"button\" class=\"btn btn-outline-danger\">Excluir perfil</button></div></div></div></form>";
 
             }
             return utils.LeonAPI.stringToJson(resp);

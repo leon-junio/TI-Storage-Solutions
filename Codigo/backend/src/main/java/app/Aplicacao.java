@@ -39,17 +39,19 @@ public class Aplicacao {
 			post("/estoque/cadastro", (request, response) -> estoqueService.cadastro(request, response));
 			get("/estoque/carregar/:id", (request, response) ->estoqueService.carregar(request, response));
 			post("/estoque/atualizar", (request, response) -> estoqueService.atualizar(request, response));
-			//post("/estoque/retirada", (request, response) -> estoqueService.retirada(request, response));
-			//post("/estoque/entrada", (request, response) -> estoqueService.entrada(request, response));
+
 			
 			/**
 			 * REQUISI��ES DOS SERVI�OS DE PRODUTO
 			 */
 			get("/produto/listar/:id", (request, response) -> produtoService.listar(request, response));
-			get("/produto/deletar/:id", (request, response) -> produtoService.listar(request, response));
+			get("/produto/deletar/:id", (request, response) -> produtoService.deletar(request, response));
 			post("/produto/cadastro", (request, response) -> produtoService.cadastro(request, response));
 			post("/produto/atualizar", (request, response) -> produtoService.atualizar(request, response));
 			get("/produto/carregar/:id", (request, response) -> produtoService.carregar(request, response));
+			post("/produto/retirada/:token", (request, response) -> produtoService.retirada(request, response));
+			post("/produto/entrada/:token", (request, response) -> produtoService.entrada(request, response));
+			get("/produto/loadlist/:id/:token", (request, response) -> produtoService.loadOptions(request, response));
 			/**
 			 * REQUISI��ES DOS SERVI�OS DA HOME e PERFIL
 			 */

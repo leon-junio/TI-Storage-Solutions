@@ -39,6 +39,7 @@ public class EstoqueService {
 			return utils.LeonAPI.stringToJson("<tr><td>Não existem estoques cadastrados</td></tr>");
 		}
 	}
+	
 
 	public Object cadastro(Request request, Response response) {
 		String nome = request.queryParams("nome");
@@ -80,8 +81,8 @@ public class EstoqueService {
 					+ "/pages/home.html'</script>";
 		} else {
 			response.status(203);
-			return "<script>alert('Não foi possível excluir o estoque!'); window.location.href = '"
-					+ app.Aplicacao.url + "/pages/home.html'<script>";
+			return "<script>alert('Não foi possível excluir o estoque!'); window.location.href = '" + app.Aplicacao.url
+					+ "/pages/home.html'<script>";
 		}
 	}
 
@@ -109,4 +110,7 @@ public class EstoqueService {
 		}
 
 	}
+
+	
+
 }

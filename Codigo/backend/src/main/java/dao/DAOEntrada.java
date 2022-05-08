@@ -1,6 +1,8 @@
 package dao;
 
 import model.Entrada;
+import model.Produto;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +20,15 @@ public class DAOEntrada extends DAO {
 		close();
 	}
 
-	public boolean insert(Entrada entrada) {
+	public boolean insert(Entrada entrada, int prod) {
 		boolean status = false;
+		DAOProduto daop = new DAOProduto();
+		Produto pd = daop.get(prod);
+		pd.setQuantidade(pd.getQuantidade()+entrada.getQuantidade());
+		entrada.setProduto(pd.getIdProduto());
 		try {
-			String sql = "INSERT INTO StorageSolutionsDB.entrada (quantidade,estoque,produto,data_entrada) " + "VALUES (?,?,?,?);";
+			String sql = "INSERT INTO StorageSolutionsDB.entrada (quantidade,estoque,produto,data_entrada) "
+					+ "VALUES (?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setInt(1, entrada.getQuantidade());
 			st.setInt(2, entrada.getEstoque());
@@ -30,6 +37,9 @@ public class DAOEntrada extends DAO {
 			st.executeUpdate();
 			st.close();
 			status = true;
+			if(status) {
+				daop.update(pd);
+			}
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}
@@ -62,13 +72,13 @@ public class DAOEntrada extends DAO {
 		return get("idEntrada");
 	}
 
-
 	private List<Entrada> get(String orderBy) {
 		List<Entrada> entradas = new ArrayList<Entrada>();
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM StorageSolutionsDB.entrada" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM StorageSolutionsDB.entrada"
+					+ ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Entrada p = new Entrada(rs.getInt("idEntrada"), rs.getInt("quantidade"), rs.getInt("estoque"),

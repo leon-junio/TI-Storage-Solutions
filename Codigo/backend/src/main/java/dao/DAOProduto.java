@@ -65,6 +65,48 @@ public class DAOProduto extends DAO {
 		}
 		return produto;
 	}
+	
+	
+	public ArrayList<Produto> getByEstoque(int estoque) {
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM StorageSolutionsDB.produto WHERE estoque = "+estoque+" ;";
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Produto p = new Produto(rs.getInt("idProduto"), rs.getInt("quantidade"), rs.getInt("estoque"),
+						rs.getString("nome"), rs.getString("descricao"), rs.getString("codigoBarras"),
+						rs.getString("unidade"), rs.getString("marca"), rs.getFloat("peso"), rs.getDate("fabricacao"),
+						rs.getDate("validade"));
+				produtos.add(p);
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return produtos;
+	}
+	
+	
+	public Produto get(String nome,int estoque) {
+		Produto produto = null;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM StorageSolutionsDB.produto WHERE nome = '"+nome+"' AND estoque = " + estoque+" ;";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				produto = new Produto(rs.getInt("idProduto"), rs.getInt("quantidade"), rs.getInt("estoque"),
+						rs.getString("nome"), rs.getString("descricao"), rs.getString("codigoBarras"),
+						rs.getString("unidade"), rs.getString("marca"), rs.getFloat("peso"), rs.getDate("fabricacao"),
+						rs.getDate("validade"));
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return produto;
+	}
 
 	public List<Produto> get() {
 		return get("");
@@ -152,6 +194,7 @@ public class DAOProduto extends DAO {
 		}
 		return status;
 	}
+	
 
 	public boolean delete(int id) {
 		boolean status = false;
