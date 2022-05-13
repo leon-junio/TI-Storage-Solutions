@@ -36,7 +36,7 @@ public class EstoqueService {
 			return utils.LeonAPI.stringToJson(resp);
 		} catch (RuntimeException e) {
 			response.status(203);
-			return utils.LeonAPI.stringToJson("<tr><td>Não existem estoques cadastrados</td></tr>");
+			return utils.LeonAPI.stringToJson("<tr><td colspan=\"4\">Não existem estoques cadastrados</td></tr>");
 		}
 	}
 	

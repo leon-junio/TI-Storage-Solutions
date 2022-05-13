@@ -35,12 +35,11 @@
             dataQuery.send();
 
             let url = window.location.href;
-            if (url.includes("?idproduto=")) {
-                url = url.split('?idproduto=');
+            if (url.includes("&&idproduto=")) {
+                url = url.split('&&idproduto=');
                 let id = url[1];
                 let dataLoad = new XMLHttpRequest();
-                dataLoad
-                    .open('GET', 'http://localhost:6789/produto/carregar/' + id);
+                dataLoad.open('GET', 'http://localhost:6789/produto/carregar/' + id);
                 dataLoad.onload = frontBuilder;
                 dataLoad.send();
             }
@@ -50,6 +49,9 @@
             let data2 = JSON.parse(this.responseText);
             let div = document.getElementById("form-produto");
             div.innerHTML = data2.response;
+            
+            let unidade = document.querySelector('#unidade-produto').value;
+            document.querySelector('#unidade').value = unidade;
         }
 
         function checker() {
@@ -71,6 +73,9 @@
                             if (url.includes("?id")) {
                                 url = url.split('id=');
                                 let id = url[1];
+                                
+                                id = id.split('&&');
+                                id = id[0];
 
                                 document.getElementById('id-estoque').value = id;
                                 document.getElementById('link-back').href = `./home-produtos.html?id=${id}`;
@@ -211,7 +216,7 @@
                         <label for="validade" class="form-label">Ano de Validade</label> <input type="date" name="validade" id="validade" class="form-control">
                     </div>
                     <div class="col-6">
-                        <label for="marca" class="form-label">Marca do Produto</label> <input type="number" name="marca" id="marca" class="form-control">
+                        <label for="marca" class="form-label">Marca do Produto</label> <input type="text" name="marca" id="marca" class="form-control">
                     </div>
                 </div>
 

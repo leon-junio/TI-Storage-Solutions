@@ -133,49 +133,62 @@ public class PerfilService {
             }
             response.status(200);
             if (cli != null) {
-                resp = "<form id=\"form-user\" method=\"post\" action=\"/perfil/atualizar/" + token
-                        + "\" class=\"form\">" +
-                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Comerciante\" readonly>"
-                        +
-                        "<div class=\"col-6\"><label for=\"nome\" class=\"form-label\">Nome</label> <input type=\"text\" name=\"nome\" id=\"nome\" value=\""
-                        + cli.getNome() + "\" class=\"form-control\">"
-                        +
-                        "</div></div><div class=\"row mb-3\"><div class=\"col-6\"><label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control\" value=\""
-                        + cli.getEmail() + "\"></div>"
-                        +
-                        "<div class=\"col-6\"><label for=\"usuario\" class=\"form-label\">Usuário</label> <input type=\"text\" readonly disabled name=\"usuario\" id=\"usuario\" class=\"form-control\" value=\""
-                        + cli.getUsuario() + "\"></div>"
-                        +
-                        "</div><div class=\"row mb-3\"><a href=\"./home-trocar-senha.html\"><button type=\"button\" class=\"btn btn-outline-primary p-3\">Trocar "
-                        +
-                        "Senha</button></a></div><div class=\"row\"><div class=\"col-6\"><button type=\"submit\" class=\"btn btn-outline-success p-3\">Atualizar Dados</button> </div></div><br>"
-                        +
-                        "<div class=\"row\"><hr><div class=\"row mb-3\"><div class=\"col-6\"><button onclick=\"pergunta('Deseja realmente excluir todos os seus dados ?','/perfil/deletar/"
-                        + token
-                        + "');\" type=\"button\" class=\"btn btn-outline-danger\">Excluir perfil</button></div></div></div></form>";
-
+            	resp = "<form id=\"form-user\" method=\"post\" action=\"/perfil/atualizar/" + token + "\" class=\"form\">";
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">";
+            	resp += "<label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Comerciante\" readonly>";
+            	resp += "</div></div>"; 
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">"; 
+            	resp += "<label for=\"usuario\" class=\"form-label\">Usuário</label> <input type=\"text\" readonly disabled name=\"usuario\" id=\"usuario\" class=\"form-control\" value=\"" + cli.getUsuario() + "\">";
+            	resp += "</div> <div class=\"col-6\">";
+            	resp += "<label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control\" value=\"" + cli.getEmail() + "\">";
+            	resp += "</div></div>"; 
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">"; 
+            	resp += "<label for=\"nome\" class=\"form-label\">Nome</label> <input type=\"text\" name=\"nome\" id=\"nome\" class=\"form-control\" value=\"" + cli.getNome() + "\">";
+            	resp += "</div> <div class=\"col-6 d-flex align-items-end\">";
+            	resp += "<a href=\"./home-trocar-senha.html\"><button type=\"button\" class=\"btn btn-outline-primary p-3\">Trocar Senha</button></a>";
+            	resp += "</div></div>"; 
+            	
+            	resp += "<div class=\"row mb-3 pb-3 border-bottom\"><div class=\"col-6\">"; 
+            	resp += "<button type=\"submit\" class=\"btn btn-outline-success p-3\">Atualizar Dados</button>";
+            	resp += "</div></div>";
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">"; 
+            	resp += "<button onclick=\"pergunta('Deseja realmente excluir todos os seus dados ?','/perfil/deletar/" + token + "');\" type=\"button\" class=\"btn btn-outline-danger p-3\">Excluir perfil</button>";
+            	resp += "</div></div>";
+            	
+            	resp += "</form>";
             }
             if (forn != null) {
-                resp = "<form id=\"form-user\" method=\"post\" action=\"/perfil/atualizar/" + token
-                        + "\" class=\"form\">" +
-                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Fornecedor\" disabled>"
-                        +
-                        "</div></div><div class=\"row mb-3\"><div class=\"col-6\"><label for=\"nome\" class=\"form-label\">Nome</label> <input type=\"text\" name=\"nome\" id=\"nome\" value=\""
-                        + forn.getNome() + "\" class=\"form-control\">"
-                        +
-                        "</div><div class=\"row mb-3\"><div class=\"col-6\"><label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control\" value=\""
-                        + forn.getEmail() + "\"></div></div></div>"
-                        +
-                        "<div class=\"row mb-3\"><div class=\"col-6\"><label for=\"usuario\" class=\"form-label\">Usuário</label> <input type=\"text\" readonly disabled name=\"usuario\" id=\"usuario\" class=\"form-control\" value=\""
-                        + forn.getUsuario() + "\"></div>"
-                        +
-                        "</div><div class=\"row mb-3\"><a href=\"./home-trocar-senha.html\"><button type=\"button\" class=\"btn btn-outline-primary p-3\">Trocar "
-                        +
-                        "Senha</button></a></div><div class=\"row\"><div class=\"col-6\"><button type=\"submit\" class=\"btn btn-outline-success p-3\">Atualizar Dados</button> </div></div><br>"
-                        +
-                        "<div class=\"row\"><hr><div class=\"row mb-3\"><div class=\"col-6\"><button onclick=\"pergunta('Deseja realmente excluir todos os seus dados ?','/perfil/deletar/"
-                        + token
-                        + "');\" type=\"button\" class=\"btn btn-outline-danger\">Excluir perfil</button></div></div></div></form>";
+            	resp = "<form id=\"form-user\" method=\"post\" action=\"/perfil/atualizar/" + token + "\" class=\"form\">";
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">";
+            	resp += "<label for=\"tipo\" class=\"form-label\">Tipo</label> <input type=\"text\" name=\"tipo\" id=\"tipo\" class=\"form-control\" value=\"Fornecedor\" readonly>";
+            	resp += "</div></div>"; 
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">"; 
+            	resp += "<label for=\"usuario\" class=\"form-label\">Usuário</label> <input type=\"text\" readonly disabled name=\"usuario\" id=\"usuario\" class=\"form-control\" value=\"" + forn.getUsuario() + "\">";
+            	resp += "</div> <div class=\"col-6\">";
+            	resp += "<label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control\" value=\"" + forn.getEmail() + "\">";
+            	resp += "</div></div>"; 
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">"; 
+            	resp += "<label for=\"nome\" class=\"form-label\">Nome</label> <input type=\"text\" name=\"nome\" id=\"nome\" class=\"form-control\" value=\"" + forn.getNome() + "\">";
+            	resp += "</div> <div class=\"col-6 d-flex align-items-end\">";
+            	resp += "<a href=\"./home-trocar-senha.html\"><button type=\"button\" class=\"btn btn-outline-primary p-3\">Trocar Senha</button></a>";
+            	resp += "</div></div>"; 
+            	
+            	resp += "<div class=\"row mb-3 pb-3 border-bottom\"><div class=\"col-6\">"; 
+            	resp += "<button type=\"submit\" class=\"btn btn-outline-success p-3\">Atualizar Dados</button>";
+            	resp += "</div></div>";
+            	
+            	resp += "<div class=\"row mb-3\"><div class=\"col-6\">"; 
+            	resp += "<button onclick=\"pergunta('Deseja realmente excluir todos os seus dados ?','/perfil/deletar/" + token + "');\" type=\"button\" class=\"btn btn-outline-danger p-3\">Excluir perfil</button>";
+            	resp += "</div></div>";
+            	
+            	resp += "</form>";
 
             }
             return utils.LeonAPI.stringToJson(resp);

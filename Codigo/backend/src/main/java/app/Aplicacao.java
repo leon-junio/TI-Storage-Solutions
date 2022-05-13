@@ -45,13 +45,14 @@ public class Aplicacao {
 			 * REQUISI��ES DOS SERVI�OS DE PRODUTO
 			 */
 			get("/produto/listar/:id", (request, response) -> produtoService.listar(request, response));
-			get("/produto/deletar/:id", (request, response) -> produtoService.deletar(request, response));
+			get("/produto/deletar/:idestoque/:idproduto", (request, response) -> produtoService.deletar(request, response));
 			post("/produto/cadastro", (request, response) -> produtoService.cadastro(request, response));
 			post("/produto/atualizar", (request, response) -> produtoService.atualizar(request, response));
 			get("/produto/carregar/:id", (request, response) -> produtoService.carregar(request, response));
 			post("/produto/retirada/:token", (request, response) -> produtoService.retirada(request, response));
 			post("/produto/entrada/:token", (request, response) -> produtoService.entrada(request, response));
 			get("/produto/loadlist/:id/:token", (request, response) -> produtoService.loadOptions(request, response));
+			get("/produto/getQtd/:idproduto", (request, response) -> produtoService.getQtd(request, response));
 			/**
 			 * REQUISI��ES DOS SERVI�OS DA HOME e PERFIL
 			 */
