@@ -1,0 +1,38 @@
+Como fazer uma retirada? 
+Para realizar uma retirada acesse a guia de retirada dentro do estoque que você deseja, escolha um produto na caixa de seleção e após isso selecione a quantidade desejada para remover do estoque.
+O que é uma retirada? 
+Uma retirada de estoque é remover uma determinada quantidade de um produto de dentro do estoque, essa ação acontece quando é feita uma venda, um produto vence ou uma entrega pé solicitada. A retirada é individual para cada produto e é salva no banco de dados contendo a data e o item retirado.
+Posso fazer uma retirada com baixa quantidade no estoque?
+Sim, porém se a quantidade selecionada for maior que o total do produto no estoque um erro vai ocorrer, avisando que não pode ser efetuada a remoção daquela quantidade.
+Como remover produtos? 
+Para remover produtos o operador deve realizar uma retirada, para isso acesse a guia de retirada dentro do estoque que você deseja, escolha um produto na caixa de seleção e após isso selecione a quantidade desejada para remover do estoque.
+Como fazer uma entrada? 
+Uma entrada de produtos pode ser feita após acessar o estoque desejado, escolher a guia de entrada de produtos, selecionar o produto desejado e definir uma quantidade para ser inserida no estoque.
+Como dar entrada de produtos ?
+Uma entrada de produtos pode ser feita após acessar o estoque desejado, escolher a guia de entrada de produtos, selecionar o produto desejado e definir uma quantidade para ser inserida no estoque.
+Como adicionar produtos? 
+Para adicionar produtos escolha um estoque e clique no botão adicionar novos produtos, com isso novos produtos podem ser adicionados e listados dentro do estoque selecionado.
+O que são os produtos? 
+Os produtos são tudo que um fornecedor ou um comerciante precisar guardar no banco de dados, tais como compras, alimentos, encomendas, materiais de construção e muitos outros que o usuário desejar!
+Como criar um estoque? 
+Um estoque pode ser criado atráves da home do nosso site, lá temos um botão para um formulário no qual preenche o nome do estoque, capacidade e demais informações.
+O que é um estoque? 
+Dentro de uma empresa, o estoque é representado por produtos (sejam eles produtos finais ou inacabados) que estão em posse de um agente econômico. São os materiais e suprimentos utilizados para a produção de seu produto ou para suprimir a necessidade da própria empresa.
+Aonde comprar um estoque? 
+Os estoques podem ser comprados atráves do canal de comunicação da plataforma.
+Forma de pagamento? 
+Atualmente a forma de pagamento aceita é por meio de boletos e pix.
+Qual o preço de uso? 
+O preço é de acordo com a demanda, porém cada usuário possuí dois estoques com até 30 produtos em cada para uso ilimitado!
+Qual o limite de estoque? 
+O Storage Solutions não possuí um limite de estoque e nem diferenciação por planos, porém temos cotas de compra de estoque e vendar por unidades e quantidades do mesmo.
+Aonde ver o historico das minhas retiradas e entradas? 
+Atualmente as retiradas e as entradas são salvas no banco de dados porém não conseguem ser acessadas no momento.
+Bom dia 
+Bom dia como posso ajudar?
+Boa noite 
+Boa noite como posso ajudar?
+Boa tarde 
+Boa tarde como posso ajudar?
+Olá, como você está? 
+Tive um ótimo dia até agora! Gosto de me sentir útil, me diga o que posso fazer por você.

@@ -1,0 +1,26 @@
+Como realizar um login?
+Para logar no site voçê primeiramente tem de ter uma conta em nosso site. Após criar sua conta, vá para a página de login, digite seu e-mail e sua senha e clique em entrar.
+Como crio minha conta?
+Para criar sua conta, vá para a página de cadastro clicando no botão cadastro. Ao iniciar o cadastro, selecione entre cliente e fornecedor para o tipo da sua conta e clique em próximo. Em seguida, preencha seus dados nos campos faltantes e clique em cadastrar.
+Qual a diferença entre fornecedor e cliente? 
+Um cliente é representado pelos donos de estabelecimentos ou qualquer usuário que queira organizar seu estoque de produtos, jogos, etc. Um fornecedor também é um cliente, porém possui um detalhe a mais. O fornecedor além de organizar seu estoque, pode atribuílos a um ou à vários clientes específicos.
+Como altero os dados da minha conta? 
+Ao logar em nosso site, acesse no menu à esquerda a opção de usuário. Ao clicar, você será redirecionado para a tela que contém as informações referentes a sua conta. Nesta tela, você pode alterar seus dados clicando no botão atualizar.
+Como altero minha senha? 
+Ao logar em nosso site, acesse no menu à esquerda a opção de usuário. Ao clicar, você será redirecionado para a tela que contém as informações referentes a sua conta. Na tela do seu usuário, clique em alterar senha. Nesta nova tela, digite uma nova senha, confirme-a e clique em atualizar senha.
+Como deslogo do sistema? 
+No menu lateral, à esquerda, clique em deslogar.
+Como saio do sistema? 
+No menu lateral, à esquerda, clique em deslogar.
+Por que tenho que colocar um e-mail para cadastrar minha conta? 
+Identificamos e diferenciamos nossos usuários através do e-mail. Isso pois o e-mail é único e de fácil identificação.
+Por que tenho que colocar meu nome para o cadastro? 
+Sempre que atendemos um cliente perguntamos seu nome para melhor atendimento e tratamento. Gostamos de tratar cada cliente como único e o nome é uma forma de fazê-lo.
+Como faço para entrar em contato? 
+Você pode entrar em contato conosco enviando um e-mail para suporte@sotoragesolutions.com.br. Adoraremos respondê-lo (a).
+Quem são vocês? 
+Somos a Storage Solutions, sua solução. Fornecemos um controle de estoque para empresas que não utilizam bancos de dados relacionais para a gestão de seus produtos no inventário.
+Quem são seus donos? 
+Nossa equipe é formada por alunos do curso de Ciência da Computação da PUC Minas. Tais alunos alunos são, Vinícius Augusto, Leon Martins, Luis Fellyp e João Vitor.
+Quando foram criados? 
+A Storage Solutions nasceu em meados de março de 2022.
