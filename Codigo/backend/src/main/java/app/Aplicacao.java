@@ -42,7 +42,7 @@ public class Aplicacao {
 
 			
 			/**
-			 * REQUISI��ES DOS SERVI�OS DE PRODUTO
+			 * REQUISIÇÕES DOS SERVIÇOS DE PRODUTO
 			 */
 			get("/produto/listar/:id", (request, response) -> produtoService.listar(request, response));
 			get("/produto/deletar/:idestoque/:idproduto", (request, response) -> produtoService.deletar(request, response));
@@ -55,7 +55,7 @@ public class Aplicacao {
 			get("/produto/getQtd/:idproduto", (request, response) -> produtoService.getQtd(request, response));
 			get("/produto/historico/:id", (request, response) -> produtoService.getHistorico(request, response));
 			/**
-			 * REQUISI��ES DOS SERVI�OS DA HOME e PERFIL
+			 * REQUISIÇÕES DOS SERVI�OS DA HOME e PERFIL
 			 */
 			get("/perfil/carregar/:token", (request, response) -> perfilService.carregar(request, response));
 			get("/perfil/delete/:token", (request, response) -> perfilService.deletar(request, response));
@@ -63,7 +63,7 @@ public class Aplicacao {
 			post("/perfil/atualizar/:token", (request, response) -> perfilService.atualizar(request, response));
 
 		} else {
-			System.out.println("O servidor n�o pode iniciar e por isso sua execu��o foi abortada\n"
+			System.out.println("O servidor não pode iniciar e por isso sua execução foi abortada\n"
 					+ "Falha ao iniciar o sistema de seguran�a dos tokens!");
 			System.exit(0);
 		}
@@ -111,7 +111,7 @@ public class Aplicacao {
 	}
 
 	/**
-	 * Thread respons�vel por a cada 24 horas chamar a fun��o de limpar a tabela de
+	 * Thread respons�vel por a cada 24 horas chamar a função de limpar a tabela de
 	 * tokens
 	 * 
 	 * @throws Exception Caso ocorra erro evite iniciar o servidor
