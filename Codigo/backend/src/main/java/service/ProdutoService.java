@@ -92,7 +92,7 @@ public class ProdutoService {
 		} catch(Exception e) {
 			response.status(203);
 
-			return utils.LeonAPI.stringToJson("<tr><td colspan=\"4\">N„o h· registros no Estoque.</td></tr>");
+			return utils.LeonAPI.stringToJson("<tr><td colspan=\"4\">N√£o h√° registros no Estoque.</td></tr>");
 		} 
 	}
 
