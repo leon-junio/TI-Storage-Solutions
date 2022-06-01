@@ -112,6 +112,8 @@
 									`./home-adicionar.html?id=${id}`);
 							$("#link-rmv").attr("href",
 									`./home-remover.html?id=${id}`);
+							
+							$('#link-hist').attr("href", `./home-historico.html?id=${id}`);
 							//document.getElementById('').href = `./home-produtos.html?id=${id}`;
 						}
 						url = window.location.href;
@@ -224,6 +226,23 @@
 							</div>
 							<div class="col-9">
 								<span class="count-numbers">Nova</span> <span class="count-name">Retirada</span>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		
+		<div class="row mt-4">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<a id="link-hist" href="" style="text-decoration: none !important;">
+					<div class="card-counter btn-primary">
+						<div class="row">
+							<div class="col-3">
+								<i class="fa fa-history"></i>
+							</div>
+							<div class="col-9">
+								<span class="count-numbers">Histórico de</span> <span class="count-name">Transações</span>
 							</div>
 						</div>
 					</div>

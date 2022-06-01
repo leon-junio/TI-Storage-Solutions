@@ -53,6 +53,7 @@ public class Aplicacao {
 			post("/produto/entrada/:token", (request, response) -> produtoService.entrada(request, response));
 			get("/produto/loadlist/:id/:token", (request, response) -> produtoService.loadOptions(request, response));
 			get("/produto/getQtd/:idproduto", (request, response) -> produtoService.getQtd(request, response));
+			get("/produto/historico/:id", (request, response) -> produtoService.getHistorico(request, response));
 			/**
 			 * REQUISI��ES DOS SERVI�OS DA HOME e PERFIL
 			 */

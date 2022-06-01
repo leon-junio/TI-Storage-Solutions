@@ -9,6 +9,7 @@ import spark.Response;
 import utils.LeonAPI;
 import dao.DAOEntrada;
 import dao.DAOEstoque;
+import dao.DAOHistorico;
 import dao.DAOProduto;
 import dao.DAORetirada;
 import dao.DAOToken;
@@ -25,6 +26,7 @@ public class ProdutoService {
 	private DAOEstoque daoe = new DAOEstoque();
 	private DAOEntrada daoet = new DAOEntrada();
 	private DAORetirada daort = new DAORetirada();
+	private DAOHistorico daoh = new DAOHistorico();
 	static final SimpleDateFormat dateFormated = new SimpleDateFormat("yyyy-MM-dd");
 
 	public Object cadastro(Request request, Response response) throws Exception {
@@ -57,6 +59,41 @@ public class ProdutoService {
 			return "<script>alert('Não foi possível cadastrar o Produto!'); window.location.href = '"
 					+ app.Aplicacao.url + "/pages/home-form-produto.html?id=" + estoque + "';</script>";
 		}
+	}
+	
+	public Object getHistorico(Request request, Response response) {
+		try {			
+			int estoque = Integer.parseInt(request.params(":id")); 
+			String resp = "";
+			response.header("Content-Type", "Json; charset=utf-8");
+			
+			List<model.Historico> historicos = daoh.get(estoque);
+
+			if (historicos == null) {
+				throw new Exception("Erro em tempo de execução!");
+			}
+
+			if (historicos.size() > 0) {
+				response.status(200);
+
+				for (model.Historico historico : historicos) {
+					resp += "<tr>";
+					resp += "<th scope=\"row\">" + LeonAPI.formatHoras(historico.getData_entrada()) + "</th>\n";
+					resp += "<td>" + historico.getNome_produto() + "</td>\n";
+					resp += "<td>" + historico.getQtd() + "</td>\n";
+					resp += "<td>" + historico.getTipo() + "</td>\n";
+					resp += "</tr>\n";
+				}
+				
+				return utils.LeonAPI.stringToJson(resp);
+			} else {
+				throw new Exception("Erro em tempo de execução!");
+			}
+		} catch(Exception e) {
+			response.status(203);
+
+			return utils.LeonAPI.stringToJson("<tr><td colspan=\"4\">N�o h� registros no Estoque.</td></tr>");
+		} 
 	}
 
 	public Object listar(Request request, Response response) {
