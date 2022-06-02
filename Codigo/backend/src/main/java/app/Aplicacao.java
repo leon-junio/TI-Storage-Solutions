@@ -17,11 +17,9 @@ public class Aplicacao {
 	public static final String url = "http://localhost:" + porta;
 
 	public static void main(String[] args) {
-
 		running = true;
 		port(porta);
 		staticFiles.location("/public");
-
 		if (securityService()) {
 			System.out.println("Servidor ONLINE :D");
 			/**
@@ -39,8 +37,6 @@ public class Aplicacao {
 			post("/estoque/cadastro", (request, response) -> estoqueService.cadastro(request, response));
 			get("/estoque/carregar/:id", (request, response) ->estoqueService.carregar(request, response));
 			post("/estoque/atualizar", (request, response) -> estoqueService.atualizar(request, response));
-
-			
 			/**
 			 * REQUISIÇÕES DOS SERVIÇOS DE PRODUTO
 			 */
@@ -65,13 +61,12 @@ public class Aplicacao {
 			 * REQUISIÇÕES PARA OS FORNECEDORES
 			 */
 			get("/fornecedor/listar/:token", (request, response) -> fornecedorService.listar(request, response));
-
+			//FIM DAS REQUISIÇÕES
 		} else {
 			System.out.println("O servidor não pode iniciar e por isso sua execução foi abortada\n"
 					+ "Falha ao iniciar o sistema de segurança dos tokens!");
 			System.exit(0);
 		}
-
 	}
 
 	/**
