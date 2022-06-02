@@ -453,12 +453,12 @@ public class LeonAPI {
         int upperLimit = 122;
         Random random = new Random();
         StringBuffer r = new StringBuffer(n+10);
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n+10; i++) {
             int nextRandomChar = lowerLimit
                     + (int) (random.nextFloat()
                             * (upperLimit - lowerLimit + 1));
             r.append((char) nextRandomChar);
         }
-        return r.toString();
+        return HashUtils.getHashMd5(r.toString());
     }
 }
