@@ -452,7 +452,7 @@ public class LeonAPI {
         int lowerLimit = 97;
         int upperLimit = 122;
         Random random = new Random();
-        StringBuffer r = new StringBuffer(n);
+        StringBuffer r = new StringBuffer(n+10);
         for (int i = 0; i < n; i++) {
             int nextRandomChar = lowerLimit
                     + (int) (random.nextFloat()
