@@ -60,8 +60,6 @@ public class MainService {
 		}
 	}
 
-	
-	
 	public Object check(Request request, Response response) {
 		String token = request.params(":token");
 		if (!token.equals("null")) {
@@ -73,11 +71,6 @@ public class MainService {
 		}
 	}
 
-	
-	
-	
-	
-	
 	public Object listar(Request request, Response response) {
 		try {
 			String token = request.params(":token");
@@ -107,13 +100,16 @@ public class MainService {
 					resp += "<td>Estoque ativo!</td>\n";
 					resp += "<td>" + estoque.getCapacidade() + "</td>\n";
 					resp += "<td class=\"d-flex align-items-center gap-5\">\n";
-					resp += "<a href=\""+ app.Aplicacao.url + "/pages/home-estoque.html?name="+estoque.getNome()+"&id=" + estoque.getIdEstoque() + "\">";
+					resp += "<a id=\"btn-view\" href=\"" + app.Aplicacao.url + "/pages/home-estoque.html?name="
+							+ estoque.getNome() + "&id=" + estoque.getIdEstoque() + "\">";
 					resp += "<button type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-eye\"></i></button>";
 					resp += "</a>";
 					resp += "<a href=\"" + app.Aplicacao.url + "/pages/home-form-estoque.html?id="
 							+ estoque.getIdEstoque()
 							+ "\"><button type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button></a>";
-					resp +=  "<button onclick=\"pergunta('Deseja realmente excluir ?','/estoque/deletar/"+estoque.getIdEstoque()+"');\" type=\"button\" class=\"btn btn-outline-danger\"><i class=\"fas fa-trash\"></i></button>";
+					resp += "<button onclick=\"pergunta('Deseja realmente excluir ?','/estoque/deletar/"
+							+ estoque.getIdEstoque()
+							+ "');\" type=\"button\" class=\"btn btn-outline-danger\"><i class=\"fas fa-trash\"></i></button>";
 					resp += "</td>";
 					resp += "</tr>\n";
 				}
@@ -128,21 +124,19 @@ public class MainService {
 	}
 
 	public Object cadastro(Request request, Response response) {
+		try {
 		String tipoUsuario = request.queryParams("tipo");
-		String nome = request.queryParams("nome");
+		String nome = request.queryParams("nome")+" ";
 		String email = request.queryParams("email");
 		String senha = request.queryParams("senha");
-
-		String userName = nome + "@" + UUID.randomUUID().toString().substring(0, 7);
-
+		String userName = nome.substring(0, nome.indexOf(" ")).trim().toLowerCase() + "@"
+				+ UUID.randomUUID().toString().substring(0, 10);
 		boolean resp;
-
-		if (tipoUsuario == "fornecedor") {
+		if (tipoUsuario.equals("fornecedor")) {
 			resp = new DAOFornecedor().insert(new Fornecedor(0, nome, email, userName, senha, ""));
 		} else {
 			resp = new DAOCliente().insert(new Cliente(0, nome, email, userName, senha));
 		}
-
 		if (resp) {
 			response.status(201);
 
@@ -151,6 +145,12 @@ public class MainService {
 		} else {
 			response.status(203);
 
+			return "<script>alert('Não foi possível cadastrar o usuário!'); window.location.href = '"
+					+ app.Aplicacao.url + "/cadastro.html';</script>";
+		}
+		}catch(Exception e) {
+			response.status(500);
+			e.printStackTrace();
 			return "<script>alert('Não foi possível cadastrar o usuário!'); window.location.href = '"
 					+ app.Aplicacao.url + "/cadastro.html';</script>";
 		}

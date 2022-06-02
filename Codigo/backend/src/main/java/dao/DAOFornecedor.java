@@ -24,7 +24,7 @@ public class DAOFornecedor extends DAO {
 	public boolean insert(Fornecedor fornecedor) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO StorageSolutionsDB.fornecedor (nome,email,usuario,senha,tipoProduto) " + "VALUES (?,?,?,?);";
+			String sql = "INSERT INTO StorageSolutionsDB.fornecedor (nome,email,usuario,senha,tipoProduto) " + "VALUES (?,?,?,?,?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.setString(1, fornecedor.getNome());
 			st.setString(2, fornecedor.getEmail());
