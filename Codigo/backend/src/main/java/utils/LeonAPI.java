@@ -229,11 +229,13 @@ public class LeonAPI {
     public static String formatHoras(java.sql.Date d) {
         return sfd.format(d);
     }
+    
 
     public static Date formatDate(String str) throws ParseException {
         Date dt = sfd.parse(str);
         return dt;
     }
+    
 
     /**
      * Fun��o que retorna valor em String de uma sequ�ncia de caracteres usados
