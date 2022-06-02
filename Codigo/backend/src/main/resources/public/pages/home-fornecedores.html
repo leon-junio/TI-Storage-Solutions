@@ -61,7 +61,7 @@
                 });
 
                 let dataFront = new XMLHttpRequest();
-                dataFront.open('GET', 'http://localhost:6789/produto/historico/' + id);
+                dataFront.open('GET', 'http://localhost:6789/fornecedor/listar/');
                 dataFront.onload = frontBuilder;
                 dataFront.send();
             }
@@ -69,7 +69,7 @@
 
         function frontBuilder() {
             let list = JSON.parse(this.responseText);
-            let div = document.getElementById("list-historico");
+            let div = document.getElementById("itens-forn");
             div.innerHTML = list.response;
         }
     </script>
@@ -148,25 +148,14 @@
 
         <div class="row">
             <div class="col-12">
-                <h4 class="text-center mb-5">Histórico de Transações</h4>
+                <h4 class="text-center mb-5">Fornedores Cadastrados</h4>
             </div>
         </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Data</th>
-                    <th scope="col">Produto</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Tipo</th>
-                </tr>
-            </thead>
-            <tbody id="list-historico">
-                <tr>
-                    <td colspan="4">CARREGANDO</td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="itens-forn" class="row mt-4">
+            <h3>Carregando...</h3>
+        </div>
+
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!-- bootstrap 5 -->

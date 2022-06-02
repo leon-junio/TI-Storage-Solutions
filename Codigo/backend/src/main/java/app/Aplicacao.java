@@ -61,10 +61,14 @@ public class Aplicacao {
 			get("/perfil/delete/:token", (request, response) -> perfilService.deletar(request, response));
 			post("/perfil/newsenha/:token", (request, response) -> perfilService.newPass(request, response));
 			post("/perfil/atualizar/:token", (request, response) -> perfilService.atualizar(request, response));
+			/**
+			 * REQUISIÇÕES PARA OS FORNECEDORES
+			 */
+			get("/fornecedor/listar", (request, response) -> fornecedorService.listar(request, response));
 
 		} else {
 			System.out.println("O servidor não pode iniciar e por isso sua execução foi abortada\n"
-					+ "Falha ao iniciar o sistema de seguran�a dos tokens!");
+					+ "Falha ao iniciar o sistema de segurança dos tokens!");
 			System.exit(0);
 		}
 
