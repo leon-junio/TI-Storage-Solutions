@@ -88,6 +88,7 @@
 
         function checker() {
             console.log(this.responseText);
+            let estoque = readStorageEst();
             let data = JSON.parse(this.responseText);
             if (data.response == "false") {
                 alerta("Acesso restrito!");
@@ -98,9 +99,10 @@
                     function() {
                         $("#exit").attr("href", "/main/logout/" + user.token);
                         var url = window.location.href;
+                        let id;
                         if (url.includes("id")) {
                             url = url.split('id=');
-                            let id = url[1];
+                            id = url[1];
                             // console.log(id);
                             $("#link-prod").attr("href",
                                 `./home-produtos.html?id=${id}`);
@@ -109,7 +111,7 @@
                             $("#link-rmv").attr("href",
                                 `./home-remover.html?id=${id}`);
                             $('#link-hist').attr("href", `./home-historico.html?id=${id}`);
-                            $('#link-forn').attr("href", `./home-fornecedores.html`);
+                            $('#link-forn').attr("href", `./home-fornecedores.html?id=${id}`);
                             //document.getElementById('').href = `./home-produtos.html?id=${id}`;
                         }
                         url = window.location.href;
@@ -122,9 +124,17 @@
                             console.log(txt);
                             let div = document.getElementById("name-st");
                             if (txt == 'null' || txt == '' || txt == ' ') {
-                                div.style.display = 'none';
+                                div.innerHTML = estoque.nome;
                             } else {
                                 div.innerHTML = txt;
+                                showEstoque(id, txt, 0);
+                            }
+                        } else {
+                            let div = document.getElementById("name-st");
+                            if (estoque.nome != 'null') {
+                                div.innerHTML = estoque.nome;
+                            } else {
+                                div.style.display = 'none';
                             }
                         }
                     });

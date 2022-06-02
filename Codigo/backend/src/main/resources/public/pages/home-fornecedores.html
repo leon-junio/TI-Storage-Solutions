@@ -17,6 +17,57 @@
 
     <!-- bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .card-counter {
+            box-shadow: 2px 2px 10px #DADADA;
+            margin: 5px;
+            padding: 20px 10px;
+            height: 125px;
+            width: 100%;
+            border-radius: 5px;
+            transition: .3s linear all;
+            cursor: pointer;
+        }
+        
+        .card-counter i {
+            font-size: 5em;
+            opacity: 0.2;
+        }
+        
+        .card-counter .count-numbers {
+            padding-right: 25px;
+            text-align: right;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 25px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .card-counter .count-name {
+            padding-right: 25px;
+            text-align: right;
+            font-style: italic;
+            font-weight: bold;
+            opacity: 0.5;
+            display: block;
+            font-size: 25px;
+        }
+        
+        .btn-warning span {
+            color: white;
+        }
+        
+        .btn-info span {
+            color: white;
+        }
+        
+        .options {
+            text-decoration: none;
+        }
+    </style>
+
     <script src="../js/acess.js"></script>
     <script src="../js/main.js"></script>
     <script>
@@ -138,7 +189,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a id="link-back" href="./home.html">
+                <a id="link-back" href="">
                     <button class="mb-4 px-4 py-2 btn btn-dark off">
 						<i class="fas fa-arrow-left"></i>
 					</button>
