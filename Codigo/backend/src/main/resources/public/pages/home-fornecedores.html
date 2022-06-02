@@ -61,7 +61,7 @@
                 });
 
                 let dataFront = new XMLHttpRequest();
-                dataFront.open('GET', 'http://localhost:6789/fornecedor/listar/');
+                dataFront.open('GET', 'http://localhost:6789/fornecedor/listar/' + user.token);
                 dataFront.onload = frontBuilder;
                 dataFront.send();
             }

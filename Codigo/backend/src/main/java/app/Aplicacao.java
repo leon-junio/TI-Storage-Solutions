@@ -64,7 +64,7 @@ public class Aplicacao {
 			/**
 			 * REQUISIÇÕES PARA OS FORNECEDORES
 			 */
-			get("/fornecedor/listar", (request, response) -> fornecedorService.listar(request, response));
+			get("/fornecedor/listar/:token", (request, response) -> fornecedorService.listar(request, response));
 
 		} else {
 			System.out.println("O servidor não pode iniciar e por isso sua execução foi abortada\n"

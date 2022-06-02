@@ -3,6 +3,10 @@ package service;
 import java.util.List;
 
 import dao.DAOFornecedor;
+import dao.DAOToken;
+import model.Cliente;
+import model.Estoque;
+import model.Fornecedor;
 import spark.Request;
 import spark.Response;
 
@@ -15,10 +19,30 @@ public class FornecedorService {
 
 	public Object listar(Request request, Response response) {
 		try {
-			int estoque = Integer.parseInt(request.params(":id"));
+			boolean chk = false;
 			response.header("Content-Type", "Json; charset=utf-8");
-
+			String token = request.params("token");
+			Object prop = new DAOToken().convertTokenCliente(token);
+			Fornecedor fornc = null;
+			Cliente cli = null;
+			if (prop == null) {
+				prop = new DAOToken().convertTokenFornecedor(token);
+				fornc = (Fornecedor) prop;
+				if (fornc != null) {
+					chk = true;
+				} else {
+					chk = false;
+				}
+			} else {
+				cli = (Cliente) prop;
+				if (cli != null) {
+					chk = true;
+				} else {
+					chk = false;
+				}
+			}
 			String resp = "";
+			if(chk) {
 			List<model.Fornecedor> fornecedores = null;
 			fornecedores = daof.get();
 
@@ -45,9 +69,15 @@ public class FornecedorService {
 			} else {
 				throw new RuntimeException("Erro em tempo de execução!");
 			}
+			}else {
+				throw new RuntimeException("key_failed");	
+			}
 			return utils.LeonAPI.stringToJson(resp);
 		} catch (RuntimeException e) {
 			response.status(203);
+			if(e.getMessage().equals("key_failed")) {
+				return utils.LeonAPI.stringToJson(e.getMessage());
+			}
 			return utils.LeonAPI.stringToJson("<h3>Não existem fornecedores cadastrados no sistema no momento!</h3>");
 		} catch (Exception e) {
 			response.status(203);
