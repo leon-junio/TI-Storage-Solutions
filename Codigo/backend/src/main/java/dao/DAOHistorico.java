@@ -35,7 +35,6 @@ public class DAOHistorico extends DAO {
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Historico p = new Historico(rs.getInt("id"), rs.getInt("quantidade"), rs.getInt("estoque"), rs.getInt("produto"), rs.getString("nome_produto"), rs.getString("tipo"), rs.getDate("data_entrada"));
-				
 				historico.add(p);
 			}
 			st.close();
