@@ -1,0 +1,6 @@
+Link para usar o chatbot na web
+https://webchat.botframework.com/embed/botstoragesolutions-bot?s=CdCKQYI5mNM.R9fc23rTqUmsIwDayyaiAxqVAQjLFnv3S3tfJ_PZ81c
+Link do webservice do chatbot
+https://botstoragesolutions-bot-b335.azurewebsites.net/api/messages
+Link do projeto do chatobt em C#
+https://github.com/leon-junio/bot-StorageSolutions
