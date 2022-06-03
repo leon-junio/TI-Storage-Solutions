@@ -125,33 +125,36 @@ public class MainService {
 
 	public Object cadastro(Request request, Response response) {
 		try {
-		String tipoUsuario = request.queryParams("tipo");
-		String nome = request.queryParams("nome")+" ";
-		String email = request.queryParams("email");
-		String senha = request.queryParams("senha");
-		String userName = nome.substring(0, nome.indexOf(" ")).trim().toLowerCase() + "@"
-				+ UUID.randomUUID().toString().substring(0, 10);
-		boolean resp;
-		if (tipoUsuario.equals("fornecedor")) {
-			resp = new DAOFornecedor().insert(new Fornecedor(0, nome, email, userName, senha, ""));
-		} else {
-			resp = new DAOCliente().insert(new Cliente(0, nome, email, userName, senha));
-		}
-		if (resp) {
-			response.status(201);
+			String tipoUsuario = request.queryParams("tipo");
+			String nome = request.queryParams("nome") + " ";
+			String email = request.queryParams("email");
+			String senha = request.queryParams("senha");
+			if (senha.equals("") || senha.equals(" ") || senha.length() < 4) {
+				throw new Exception("A senha não pode ser vazia e nem ser menor que 4 caracteres!");
+			}
+			String userName = nome.substring(0, nome.indexOf(" ")).trim().toLowerCase() + "@"
+					+ UUID.randomUUID().toString().substring(0, 10);
+			boolean resp;
+			if (tipoUsuario.equals("fornecedor")) {
+				resp = new DAOFornecedor().insert(new Fornecedor(0, nome, email, userName, senha, ""));
+			} else {
+				resp = new DAOCliente().insert(new Cliente(0, nome, email, userName, senha));
+			}
+			if (resp) {
+				response.status(201);
 
-			return "<script>alert('Usuário cadastrado com sucesso!'); window.location.href = '" + app.Aplicacao.url
-					+ "/login.html';</script>";
-		} else {
-			response.status(203);
+				return "<script>alert('Usuário cadastrado com sucesso!'); window.location.href = '" + app.Aplicacao.url
+						+ "/login.html';</script>";
+			} else {
+				response.status(203);
 
-			return "<script>alert('Não foi possível cadastrar o usuário!'); window.location.href = '"
-					+ app.Aplicacao.url + "/cadastro.html';</script>";
-		}
-		}catch(Exception e) {
+				return "<script>alert('Não foi possível cadastrar o usuário!'); window.location.href = '"
+						+ app.Aplicacao.url + "/cadastro.html';</script>";
+			}
+		} catch (Exception e) {
 			response.status(500);
 			e.printStackTrace();
-			return "<script>alert('Não foi possível cadastrar o usuário!'); window.location.href = '"
+			return "<script>alert('Não foi possível cadastrar o usuário! Erro: "+e.getMessage()+"'); window.location.href = '"
 					+ app.Aplicacao.url + "/cadastro.html';</script>";
 		}
 	}

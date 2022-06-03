@@ -56,7 +56,9 @@ public class PerfilService {
             String cfsenha = request.queryParams("confirmSenha");
             if (!senha.equals(cfsenha)) {
                 throw new Exception("Senhas não conferem!");
-            } else {
+            } else if(senha.equals("") || senha.equals(" ") || senha.length()<4){
+            	 throw new Exception("A senha não pode ser vazia e nem ser menor que 4 caracteres!");
+            }else {
                 Fornecedor forn = null;
                 Cliente cli = null;
                 Object prop = new DAOToken().convertTokenCliente(token);
@@ -87,6 +89,7 @@ public class PerfilService {
     }
 
     public Object deletar(Request request, Response response) {
+    	try {
         String token = request.params(":token");
         response.header("Content-Type", "Json; charset=utf-8");
         boolean resp = false;
@@ -112,6 +115,10 @@ public class PerfilService {
             return "<script>alert('UM ERRO IMPEDIU QUE O USUARIO FOSSE EXCLUIDO');window.location.href = \""
                     + Aplicacao.url + "/pages/home-usuarios.html\";</script>";
         }
+    	}catch(Exception e) {
+    		return "<script>alert('UM ERRO IMPEDIU QUE O USUARIO FOSSE EXCLUIDO');window.location.href = \""
+                    + Aplicacao.url + "/pages/home-usuarios.html\";</script>";
+    	}
     }
 
     public Object carregar(Request request, Response response) {
