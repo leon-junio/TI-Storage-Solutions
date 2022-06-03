@@ -86,7 +86,7 @@
 
 <body onload="ver()">
 	<div id="mySidenav" class="sidenav bg-dark" style="width: 250px;">
-		<a id="bt-close" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 		<div
 			class="logo p-4 mb-4 d-flex justify-content-between align-items-center gap-4"
@@ -117,7 +117,7 @@
 		<header class="header bg-light border-bottom p-2">
 			<div
 				class="container d-flex align-items-center justify-content-between">
-				<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
+				<span id="bt-nav" style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
 				<h2 id="user-name" class="header_name">Carregando</h2>
 			</div>
 		</header>
@@ -213,35 +213,36 @@
 		crossorigin="anonymous"></script>
 
 	<script>
-   		var isClosed = false;
+	var isClosed = false;
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("home").style.marginLeft = "250px";
-            isClosed = false;
-            document.getElementById("bt-close").style.display = "none";
-        }
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("home").style.marginLeft = "250px";
+        isClosed = false;
+        document.getElementById("bt-nav").style.visibility = "hidden";
+    }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("home").style.marginLeft= "0";
-            isClosed = true;
-            document.getElementById("bt-close").style.display = "true";
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("home").style.marginLeft= "0";
+        isClosed = true;
+        document.getElementById("bt-nav").style.visibility = "visible";
+    }
+    
+    window.onresize = checkScr;
+    var w;
+    var h;
+    function checkScr() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        if(isClosed == false && w < 700 || h < 600){
+    	 closeNav();	
+        }else if(isClosed == true && w > 700){
+    	 openNav();
         }
-        
-        window.onresize = checkScr;
-        var w;
-        var h;
-        function checkScr() {
-            w = window.innerWidth;
-            h = window.innerHeight;
-            if(isClosed == false && w < 700 || h < 600){
-        	 closeNav();	
-            }else if(isClosed == true && w > 700){
-        	 openNav();
-            }
-        }
-        checkScr();
+    }
+    document.getElementById("bt-nav").style.visibility = "hidden";
+    checkScr();
         
     </script>
 </body>

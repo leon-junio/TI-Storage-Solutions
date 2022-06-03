@@ -120,7 +120,7 @@
     <div id="home" style="margin-left: 250px;">
         <header class="header bg-light border-bottom p-2">
             <div class="container d-flex align-items-center justify-content-between">
-                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                <span id="bt-nav" style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
                 <h2 id="user-name" class="header_name">Carregando</h2>
             </div>
         </header>
@@ -211,15 +211,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <script>
+        var isClosed = false;
+
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
             document.getElementById("home").style.marginLeft = "250px";
+            isClosed = false;
+            document.getElementById("bt-nav").style.visibility = "hidden";
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("home").style.marginLeft= "0";
+            document.getElementById("home").style.marginLeft = "0";
+            isClosed = true;
+            document.getElementById("bt-nav").style.visibility = "visible";
         }
+
+        window.onresize = checkScr;
+        var w;
+        var h;
+
+        function checkScr() {
+            w = window.innerWidth;
+            h = window.innerHeight;
+            if (isClosed == false && w < 700 || h < 600) {
+                closeNav();
+            } else if (isClosed == true && w > 700) {
+                openNav();
+            }
+        }
+        document.getElementById("bt-nav").style.visibility = "hidden";
+        checkScr();
     </script>
 
     <script>

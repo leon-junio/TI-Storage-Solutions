@@ -124,7 +124,7 @@
     <div id="home" style="margin-left: 250px;">
         <header class="header bg-light border-bottom p-2">
             <div class="container d-flex align-items-center justify-content-between">
-                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                <span id="bt-nav" style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
                 <h2 id="user-name" class="header_name">Carregando</h2>
             </div>
         </header>
@@ -275,7 +275,39 @@
             </div>
         </main>
     </div>
+    <script>
+        var isClosed = false;
 
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("home").style.marginLeft = "250px";
+            isClosed = false;
+            document.getElementById("bt-nav").style.visibility = "hidden";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("home").style.marginLeft = "0";
+            isClosed = true;
+            document.getElementById("bt-nav").style.visibility = "visible";
+        }
+
+        window.onresize = checkScr;
+        var w;
+        var h;
+
+        function checkScr() {
+            w = window.innerWidth;
+            h = window.innerHeight;
+            if (isClosed == false && w < 700 || h < 600) {
+                closeNav();
+            } else if (isClosed == true && w > 700) {
+                openNav();
+            }
+        }
+        document.getElementById("bt-nav").style.visibility = "hidden";
+        checkScr();
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!-- bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
