@@ -22,6 +22,7 @@ public class Aplicacao {
 		staticFiles.location("/public");
 		if (securityService()) {
 			System.out.println("Servidor ONLINE :D");
+			System.out.println("Inicio em: "+ new java.util.Date().toString());
 			/**
 			 * REQUISIÇÕES DOS SERVIÇOS DO MAIN
 			 */
