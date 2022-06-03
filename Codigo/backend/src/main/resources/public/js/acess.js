@@ -54,5 +54,5 @@ function onStart() {
 
 function logout() {
     onStart();
-    window.location.href = "../index.html";
+    window.location.href = "http://localhost:6789/index.html";
 }

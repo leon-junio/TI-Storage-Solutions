@@ -51,7 +51,7 @@ public class MainService {
 		resp = daotk.delete(token);
 		if (resp) {
 			response.status(201);
-			return "<script src=\"" + app.Aplicacao.url + "/js/acess.js" + "\"></script>\n<script>logout();\n"
+			return "<script src=\"" + app.Aplicacao.url + "/js/acess.js" + "\"></script>\n<script>onStart();\n"
 					+ "window.location.href = '" + app.Aplicacao.url + "';</script>";
 		} else {
 			response.status(203);
