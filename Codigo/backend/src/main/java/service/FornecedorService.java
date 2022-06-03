@@ -79,10 +79,10 @@ public class FornecedorService {
 			if (e.getMessage().equals("key_failed")) {
 				return utils.LeonAPI.stringToJson(e.getMessage());
 			}
-			return utils.LeonAPI.stringToJson("<h3>Não existem fornecedores cadastrados no sistema no momento!</h3>");
+			return utils.LeonAPI.stringToJson("<h3 class=\"text-center\">Não existem fornecedores cadastrados no sistema no momento!</h3>");
 		} catch (Exception e) {
 			response.status(203);
-			return utils.LeonAPI.stringToJson("<h3>Erro no sistema por favor tente novamente mais tarde!</h3>");
+			return utils.LeonAPI.stringToJson("<h3 class=\"text-center\">Erro no sistema por favor tente novamente mais tarde!</h3>");
 		}
 	}
 
